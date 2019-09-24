@@ -1,0 +1,105 @@
+/* Please arrange the elements in alphabet order*/
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+#advertising-avenues-list {
+  padding: 30px 0px;
+}
+
+.ad-img {
+  width: 100%;
+}
+
+#button-div {
+  text-align: right;
+  padding: 0px 30px;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  width: 90%;
+  height: width;
+  margin: 10px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.container {
+  text-align: left;
+}
+#continue-button {
+  background: #196aa3;
+  margin: 5%;
+}
+
+#decor {
+  height: 100px;
+  background: blue;
+}
+.grid-container {
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  padding-bottom: 20px;
+}
+
+header {
+  background: #196aa3;
+  color: rgb(5, 4, 4);
+  padding: 10px 30px; /* (down, to-right) */
+}
+
+#label {
+  text-align: center;
+  padding-top: 60px;
+  padding-bottom: 50px;
+  font-size: 150%;
+}
+
+#logo-white {
+  width: 70px;
+}
+
+#one-stop-name {
+  padding: 50px 10px;
+}
+
+#page-name {
+  color: white;
+  padding: 10px 0px;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 0;
+  text-align: left;
+}
+
+.page-footer {
+  background: #196aa3;
+  color: white;
+  font-size: 10px;
+  flex-shrink: none;
+  bottom: 0;
+  width: 100%;
+  height: 3rem; /* Footer height */
+}
+
+#submit-button {
+  background: #196aa3;
+  margin: 20px;
+}
+
+#submit-button-div {
+  text-align: right;
+}

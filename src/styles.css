@@ -4,11 +4,6 @@
   text-align: center;
 }
 
-#button-div {
-  text-align: right;
-  padding: 0px 30px;
-}
-
 .advertiser-cell {
   margin: .5rem;
   background: #ffffff;
@@ -36,6 +31,11 @@
   border: 2px solid #1976D2;
   box-sizing: border-box;
   box-shadow: 0 0 20px 0 rgba(13, 71, 161, 0.5), 0 5px 5px 0 rgba(13, 71, 161, 0.5);
+}
+
+#button-div {
+  text-align: right;
+  padding: 0px 30px;
 }
 
 .container {

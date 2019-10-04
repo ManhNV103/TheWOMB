@@ -1,7 +1,7 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 
-import AdvertiserList from './AdvertiserList';
+import AdvertiserList from "./AdvertiserList";
 
 const Button = withRouter(({ history }) => (
   <button
@@ -15,6 +15,8 @@ const Button = withRouter(({ history }) => (
     CONTINUE
   </button>
 ));
+
+let setOfKeys = new Set([]);
 
 const advertisers = [
   {
@@ -83,7 +85,7 @@ export default function Home() {
           <div id="label">
             Please select the advertising avenues from below:
           </div>
-          <AdvertiserList advertisers={advertisers} />
+          <AdvertiserList advertisers={advertisers} setOfKeys={setOfKeys} />
           <div id="button-div">
             <Button />
           </div>
@@ -96,4 +98,4 @@ export default function Home() {
       </footer>
     </div>
   );
-};
+}

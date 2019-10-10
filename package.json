@@ -2,7 +2,7 @@
   "name": "goondiwindi",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://thewomb.github.io/one-stop-event-registration",
+  "homepage": "https://ManhNV103.github.io/TheWOMB",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
@@ -18,7 +18,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "predeploy": "yarn run build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

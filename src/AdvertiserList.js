@@ -7,7 +7,6 @@ export default function AdvertiserList(props) {
 
   const onSelect = id => {
     let index = selected.indexOf(id);
-
     if (index < 0) {
       setSelected([...selected, id]);
     } else {
@@ -23,7 +22,7 @@ export default function AdvertiserList(props) {
           name={advertiser.name}
           image={advertiser.image}
           onSelect={onSelect}
-          setOfKeys={props.setOfKeys}
+          chosenAdvertisers={props.chosenAdvertisers}
         />
       </div>
     );

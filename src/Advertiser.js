@@ -7,9 +7,9 @@ export default function Advertiser(props) {
     setSelected(!selected);
     props.onSelect(props.id);
     if (!selected) {
-      props.setOfKeys.add(props.id);
+      props.chosenAdvertisers.add(props.id);
     } else {
-      props.setOfKeys.delete(props.id);
+      props.chosenAdvertisers.delete(props.id);
     }
   };
 

@@ -2,10 +2,12 @@
   "name": "goondiwindi",
   "version": "1.0.0",
   "description": "",
+  "homepage": "https://thewomb.github.io/one-stop-event-registration",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
     "bootstrap": "4.3.1",
+    "gh-pages": "^2.1.1",
     "react": "16.8.6",
     "react-dom": "16.8.6",
     "react-router-dom": "5.0.1",
@@ -16,6 +18,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

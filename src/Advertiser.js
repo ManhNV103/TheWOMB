@@ -15,7 +15,7 @@ export default function Advertiser(props) {
 
   return (
     <div
-      className={"advertiser-cell" + (selected ? " selected" : "")}
+     className={"advertiser-cell" + (selected ? " selected" : "")}
       onClick={handleClick}
     >
       <div className="advertiser-img-ratio">

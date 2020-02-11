@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Home from "./Home.js";
-import Form from "./Form.js";
+import Home from "./components/Home.js";
+import Form from "./components/Form.js";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import "./styles.css";

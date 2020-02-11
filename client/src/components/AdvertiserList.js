@@ -14,19 +14,24 @@ export default function AdvertiserList(props) {
     }
   };
 
-  const advertiserList = props.advertisers.map(advertiser => {
-    return (
-      <div style={{ width: 100 / imagesPerRow + "%" }} key={advertiser.id}>
-        <Advertiser
-          id={advertiser.id}
-          name={advertiser.name}
-          image={advertiser.image}
-          onSelect={onSelect}
-          chosenAdvertisers={props.chosenAdvertisers}
-        />
-      </div>
-    );
-  });
+  let advertiserList = null;
+
+  if(props.advertisers.length) {
+	 const advertiserList = props.advertisers.map(advertiser => {
+	   return (
+	     <div style={{ width: 100 / imagesPerRow + "%" }} key={advertiser.id}>
+	       <Advertiser
+	         id={advertiser.id}
+	         name={advertiser.name}
+	         image={advertiser.image}
+	         onSelect={onSelect}
+	         chosenAdvertisers={props.chosenAdvertisers}
+	       />
+	     </div>
+	   );
+	 });
+  }
+
 
   return <div className="grid-container">{advertiserList}</div>;
 }

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 
 import AdvertiserList from "./AdvertiserList";
+import apiRequest from '../util/apiRequest';
 
 let chosenAdvertisers = new Set([]);
 
@@ -23,7 +24,7 @@ const elements = {
   11: "Contact phone numer"
 };
 
-const advertisers = [
+/*const advertisers = [
   {
     id: 1,
     name: "Goondiwindi Regional Council",
@@ -84,7 +85,7 @@ const advertisers = [
     image: "rebelfm.jpg",
     info: [1, 2, 4, 5, 7, 9, 10]
   }
-];
+];*/
 
 const Button = withRouter(({ history }) => (
   <button
@@ -94,7 +95,7 @@ const Button = withRouter(({ history }) => (
     onClick={() => {
       history.push({
         pathname: "/form",
-        advertisers: advertisers,
+        advertisers: [],
         chosenAdvertisers: chosenAdvertisers
       });
     }}
@@ -104,6 +105,12 @@ const Button = withRouter(({ history }) => (
 ));
 
 export default function Home() {
+  const [advertisers, setAdvertisers] = useState([]);
+
+  apiRequest('/advertisers')
+	.then(resp => resp.json())
+	.then(json => setAdvertisers(json));
+
   return (
     <div>
       <header>

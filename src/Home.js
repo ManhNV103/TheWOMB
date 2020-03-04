@@ -104,6 +104,7 @@ const Button = withRouter(({ history }) => (
 ));
 
 export default function Home() {
+  chosenAdvertisers.clear()
   return (
     <div>
       <header>

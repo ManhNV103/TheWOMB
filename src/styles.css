@@ -50,6 +50,11 @@
   height: 100px;
   background: blue;
 }
+
+.details {
+  font-weight: bold ;
+}
+
 .grid-container {
   text-align: center;
   display: flex;

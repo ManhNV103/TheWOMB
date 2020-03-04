@@ -18,6 +18,8 @@ export default function Form(props) {
     }
   });
 
+  
+
   return (
     <div>
       <header>
@@ -44,6 +46,8 @@ export default function Form(props) {
         <div className="row">
           <div className="col">
             <form>
+              <div className="details">EVENT DETAILS</div>
+              <br/>
               {infoSet.has(1) ? (
                 <div className="form-group">
                   <label>Event title</label>
@@ -147,24 +151,19 @@ export default function Form(props) {
               ) : (
                 ""
               )}
+              <br/>
+              <div className="details">CONTACT DETAILS</div>
+              <br/>
+              <div className="form-group">
+                <label>Contact name</label>
+                <input type="text" className="form-control" placeholder="" />
+              </div>
 
-              {infoSet.has(10) ? (
-                <div className="form-group">
-                  <label>Contact name</label>
-                  <input type="text" className="form-control" placeholder="" />
-                </div>
-              ) : (
-                ""
-              )}
+              <div className="form-group">
+                <label>Contact phone number</label>
+                <input type="text" className="form-control" placeholder="" />
+              </div>
 
-              {infoSet.has(11) ? (
-                <div className="form-group">
-                  <label>Contact phone number</label>
-                  <input type="text" className="form-control" placeholder="" />
-                </div>
-              ) : (
-                ""
-              )}
 
               <div className="form-group" id="submit-button-div">
                 <button className="btn btn-primary" id="submit-button">

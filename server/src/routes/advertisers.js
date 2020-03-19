@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
 const advertisers = [
@@ -41,4 +41,4 @@ router.get('/', function(req, res, next) {
 		.json(advertisers);
 });
 
-module.exports = router;
+export default router;

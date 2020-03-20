@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 
 import AdvertiserList from "./AdvertiserList";
-import apiRequest from '../util/apiRequest';
+import useApi from '../util/useApi';
 
 let chosenAdvertisers = new Set([]);
 
@@ -24,69 +24,6 @@ const elements = {
   11: "Contact phone numer"
 };
 
-/*const advertisers = [
-  {
-    id: 1,
-    name: "Goondiwindi Regional Council",
-    image: "logo.png",
-    info: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-  },
-  {
-    id: 2,
-    name: "7 News Toowoomba",
-    image: "7news.png",
-    info: [1, 2, 5, 7, 9, 10]
-  },
-  {
-    id: 3,
-    name: "Goondiwindi Argus",
-    image: "goondiwindi_argus.png",
-    info: [1, 2, 3, 7, 8, 11]
-  },
-  {
-    id: 4,
-    name: "Goondiwindi Care",
-    image: "goondiwindi_care.jpg",
-    info: [1, 2, 3, 5, 7, 10]
-  },
-  {
-    id: 5,
-    name: "Macintyre Gazette",
-    image: "macintyre.png",
-    info: [1, 2, 3, 5, 7, 8, 9]
-  },
-  {
-    id: 6,
-    name: "QLD Country Life",
-    image: "qld_country_life.png",
-    info: [1, 2, 7, 8, 11]
-  },
-  {
-    id: 7,
-    name: "WinNews Toowoomba",
-    image: "winnews.jpg",
-    info: [1, 2, 3, 7, 10, 11]
-  },
-  {
-    id: 8,
-    name: "Southern Free Times",
-    image: "southern.png",
-    info: [1, 2, 4, 5, 7, 8, 9]
-  },
-  {
-    id: 9,
-    name: "Chronicle",
-    image: "chronicle.jpg",
-    info: [1, 2, 4, 5, 6, 7, 8, 11]
-  },
-  {
-    id: 10,
-    name: "Rebel FM",
-    image: "rebelfm.jpg",
-    info: [1, 2, 4, 5, 7, 9, 10]
-  }
-];*/
-
 const Button = withRouter(({ history }) => (
   <button
     type="button"
@@ -105,11 +42,7 @@ const Button = withRouter(({ history }) => (
 ));
 
 export default function Home() {
-  const [advertisers, setAdvertisers] = useState([]);
-
-  apiRequest('/advertisers')
-	.then(resp => resp.json())
-	.then(json => setAdvertisers(json));
+  const advertisers = useApi('/advertisers', {})
 
   return (
     <div>

@@ -4,7 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "nodemon --ignore src/public/static --exec 'babel-node -r ./node_modules/dotenv/config ./src/bin/www.js'",
-		"build": "babel src/ -d dist/",
+		"build": "babel src/ -d build/",
 		"start": "NODE_ENV=production node -r dotenv/config dist/bin/www.js"
 	},
 	"dependencies": {

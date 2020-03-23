@@ -1,0 +1,13 @@
+@import "_variables";
+
+.footer {
+    background-color: $primary-theme;
+    color: #fff;
+    text-align: center;
+    padding: 1.5rem 0;
+
+    .footer-admin a {
+        color: #fff;
+        text-decoration: underline;
+    }
+}

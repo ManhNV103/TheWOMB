@@ -1,0 +1,13 @@
+.ui.card.login-container {
+    margin: 0 auto;
+    padding: 2rem;
+    width: 25rem;
+
+    .button, .input {
+        margin: .5rem 0;
+    }
+
+    .login-btn {
+        margin-left: auto;
+    }
+}

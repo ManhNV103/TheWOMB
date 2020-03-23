@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-export default function Advertiser(props) {
+const Advertiser = (props) => {
   const [selected, setSelected] = useState(false);
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     setSelected(!selected);
     props.onSelect(props.id);
+
     if (!selected) {
       props.chosenAdvertisers.add(props.id);
     } else {
@@ -15,7 +16,7 @@ export default function Advertiser(props) {
 
   return (
     <div
-     className={"advertiser-cell" + (selected ? " selected" : "")}
+      className={"advertiser-cell" + (selected ? " selected" : "")}
       onClick={handleClick}
     >
       <div className="advertiser-img-ratio">
@@ -24,3 +25,5 @@ export default function Advertiser(props) {
     </div>
   );
 }
+
+export default Advertiser;

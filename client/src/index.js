@@ -1,17 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Home from "./components/Home.js";
-import Form from "./components/Form.js";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Registration from './components/registration/Registration';
+import Admin from './components/admin/Admin';
 
-import "./styles.css";
-
-function App() {
+const App = () => {
   return (
-    <div className="App">
+    <div className="app">
       <Router>
-        <Route path="/form/" component={Form} />
-        <Route path="/" exact component={Home} />
+        <Route path="/" component={Registration} />
+        <Route path="/admin" component={Admin} />
       </Router>
     </div>
   );

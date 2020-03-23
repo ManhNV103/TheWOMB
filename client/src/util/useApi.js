@@ -42,18 +42,21 @@ const apiResponse = async (endpoint, options = {}) => {
 		.catch(onError);
 };
 
-const useApi = (endpoint, options = {}) => {
-	const [response, setResponse] = useState([]);
+const useApi = (endpoint, options = {}, init = null) => {
+	const [response, setResponse] = useState(init);
 
 	useEffect(() => {
-		const getResponse = async (endpoint, options) => {
-			const json = await apiResponse(endpoint, options);
-
-			return json;
+		const fetchResponse = async (endpoint, options) => {
+			try {
+				const json = await apiResponse(endpoint, options);
+				setResponse(json)
+			} catch(e) {
+				setResponse(init)
+			}
 		}
-
-		setResponse(getResponse(endpoint, options));
-	}, [])
+		fetchResponse(endpoint, options)
+	// eslint-disable-next-line
+	}, []);
 
 	return response;
 };

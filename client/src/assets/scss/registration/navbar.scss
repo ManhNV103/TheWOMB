@@ -1,0 +1,29 @@
+@import "_variables";
+
+.navbar {
+    background-color: $primary-theme;
+    color: #fff;
+    height: 4.5rem;
+
+    .container {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .navbar-image {
+        height: 100%;
+        padding: .3rem .5rem .3rem 0;
+
+        img {
+            height: 100%;
+        }
+    }
+
+    .navbar-heading {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #fff;
+        text-decoration: none;
+    }
+}

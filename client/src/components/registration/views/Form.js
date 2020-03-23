@@ -1,9 +1,4 @@
-import React from "react";
-
-let elements = {
-  1: "Event title",
-  2: "Contact name"
-};
+import React from 'react';
 
 let infoSet = new Set();
 export default function Form(props) {

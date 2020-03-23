@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Advertiser from "./Advertiser";
 
-export default function AdvertiserList(props) {
+const AdvertiserList = (props) => {
   const [selected, setSelected] = useState([]);
   const imagesPerRow = 5;
 
@@ -17,7 +17,7 @@ export default function AdvertiserList(props) {
   let advertiserList = null;
 
   if(props.advertisers.length) {
-	 const advertiserList = props.advertisers.map(advertiser => {
+	 advertiserList = props.advertisers.map(advertiser => {
 	   return (
 	     <div style={{ width: 100 / imagesPerRow + "%" }} key={advertiser.id}>
 	       <Advertiser
@@ -33,5 +33,7 @@ export default function AdvertiserList(props) {
   }
 
 
-  return <div className="grid-container">{advertiserList}</div>;
-}
+  return <div className="advertiser-list">{advertiserList}</div>;
+};
+
+export default AdvertiserList;

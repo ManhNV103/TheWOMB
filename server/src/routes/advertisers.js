@@ -5,32 +5,32 @@ const advertisers = [
 	{
 		id: 1,
 		name: "Goondiwindi Regional Council",
-		image: "image.png"
+		image: "goondiwindi_region.png"
 	},
 	{
 		id: 2,
 		name: "7 News Toowomba",
-		image: "image.png"
+		image: "7news.png"
 	},
 	{
 		id: 3,
 		name: "Goondiwindi Argus",
-		image: "image.png"
+		image: "goondiwindi_argus.png"
 	},
 	{
 		id: 4,
 		name: "Care Goodiwindi",
-		image: "image.png"
+		image: "goondiwindi_care.jpg"
 	},
 	{
 		id: 5,
 		name: "Macintyre Gazette",
-		image: "image.png"
+		image: "macintyre.png"
 	},
 	{
 		id: 6,
 		name: "Queensland Country Life",
-		image: "image.png"
+		image: "qld_country_life.png"
 	}
 ];
 

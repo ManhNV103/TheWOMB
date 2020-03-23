@@ -1,0 +1,15 @@
+@import "./navbar.scss";
+@import "./footer.scss";
+
+@import "./advertiser/index.scss";
+@import "./login.scss";
+
+.registration {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1;
+}

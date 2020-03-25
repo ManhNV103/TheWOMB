@@ -13,15 +13,15 @@ import '../../assets/scss/registration/index.scss';
 const Registration = () => {
     return (
         <div class="registration">
-            <Navbar/>
             <Router>
+            <Navbar/>
                 <div className="ui vertical segment content">
                     <Route path="/" component={Home} exact />
                     <Route path="/registration" component={Form} />
                     <Route path="/login" component={Login} />
                 </div>
-            </Router>
             <Footer/>
+            </Router>
         </div>
     )
 };

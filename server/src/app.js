@@ -33,7 +33,7 @@ app.use(function(err, req, res, next) {
 
 	// render the error page
 	res.status(err.status || 500);
-	res.json({error: true});
+	res.json({error: true, message: err.message});
 });
 
 export default app;

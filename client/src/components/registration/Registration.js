@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import Home from './views/Home';
 import Form from './views/Form';
@@ -12,16 +12,14 @@ import '../../assets/scss/registration/index.scss';
 
 const Registration = () => {
     return (
-        <div class="registration">
-            <Router>
+        <div className="registration">
             <Navbar/>
-                <div className="ui vertical segment content">
-                    <Route path="/" component={Home} exact />
-                    <Route path="/registration" component={Form} />
-                    <Route path="/login" component={Login} />
-                </div>
+            <div className="ui vertical segment content">
+                <Route path="/" component={Home} exact />
+                <Route path="/registration" component={Form} />
+                <Route path="/login" component={Login} />
+            </div>
             <Footer/>
-            </Router>
         </div>
     )
 };

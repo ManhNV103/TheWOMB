@@ -19,24 +19,21 @@ const authenticated = (username, password) => {
 router.post('/authenticate', (req, res, next) => {
     const { username, password } = req.body;
 
-    console.log(ADMIN_USERNAME, ADMIN_PASSWORD)
-
-    if(authenticated(username, password)) {
-        const issuedAt = Math.floor(new Date() / 1000);
-
-        const accessToken = jwt.sign({
-            id: 1,
-            username: username,
-            issued_at: issuedAt
-        }, JWT_SECRET);
-
-        res.json({
-            token: accessToken
-        });
+    if(!authenticated(username, password)) {
+        next(createError(401, 'Authentication failed'));
     }
 
-    next(createError(401, 'Authentication failed'));
+    const issuedAt = Math.floor(new Date() / 1000);
 
+    const accessToken = jwt.sign({
+        id: 1,
+        username: username,
+        issued_at: issuedAt
+    }, JWT_SECRET);
+
+    res.json({
+        token: accessToken
+    });
 });
 
 export default router;

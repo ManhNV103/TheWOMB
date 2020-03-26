@@ -16,6 +16,8 @@ const request = (url, options) => {
 
             throw new ApiError(err.status, err.message);
         }
+
+        return resp.json();
     };
 
     const onError = async (error) => {
@@ -59,8 +61,6 @@ const post = (endpoint, body, options = {}) => {
     };
 
     const url = API_BASE + '/' + endpoint.replace(/^\//, '');
-
-    console.log(url, requestOptions);
 
     return request(url, requestOptions);
 };

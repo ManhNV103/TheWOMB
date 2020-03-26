@@ -1,0 +1,69 @@
+@import "_variables.scss";
+
+$sidebarWidth: 20rem;
+$sidebarPadding: 1rem;
+
+.sidebar {
+    background-color: $sidebarBackground;
+    height: 100%;
+    color: #fff;
+    width: 20rem;
+    transition: .3s width ease-in-out;
+
+    .sidebar-header {
+        font-size: 1.4rem;
+        color: #fff;
+        padding: $topmenuPadding $sidebarPadding;
+        line-height: 1;
+
+        &.ui.header:first-child {
+            margin: 0;
+        }
+    }
+
+    .sidebar-section-header {
+        color: rgba(255, 255, 255, .3);
+        font-size: .9rem;
+        font-weight:  bold;
+        text-transform: uppercase;
+        padding: 1.75rem $sidebarPadding .75rem;
+    }
+
+    .ui.vertical.menu {
+        width: 100%;
+        margin: 0;
+
+        a.link {
+            cursor: pointer;
+        }
+
+        .item {
+            padding: .5rem $sidebarPadding;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, .5);
+            display: flex;
+            align-items: center;
+
+            &.link:hover {
+                color: #fff;
+            }
+
+            & > i.icon {
+                float: none;
+                margin: 0 .7rem 0 0;
+            }
+
+            &.active {
+                color: #fff;
+            }
+        }
+    }
+
+    .ui.vertical.menu {
+        background: none;
+    }
+
+    &.hidden {
+        width: 0;
+    }
+}

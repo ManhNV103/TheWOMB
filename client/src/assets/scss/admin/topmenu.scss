@@ -1,0 +1,33 @@
+@import "_variables.scss";
+
+.topmenu {
+    color: #fff;
+
+    .ui.top.menu {
+        background-color: $topmenuBackground;
+        border-color: $topmenuBackground;
+        border-radius: 0;
+
+        .item {
+            color: #fff;
+            padding: $topmenuPadding;
+            height: 2rem;
+            box-sizing: unset;
+        }
+
+        i.icon {
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .ui.dropdown {
+            display: flex;
+            flex-direction: row-reverse;
+
+            i.icon {
+                float: none;
+                margin: 0 .5rem 0 0;
+            }
+        }
+    }
+}

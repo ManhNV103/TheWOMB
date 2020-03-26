@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-const advertisers = [
+const organizations = [
 	{
 		id: 1,
 		name: "Goondiwindi Regional Council",
@@ -35,10 +35,10 @@ const advertisers = [
 ];
 
 /* GET users listing. */
-router.get('/advertisers', function(req, res, next) {
+router.get('/organizations', function(req, res, next) {
 	res
 		.status(200)
-		.json(advertisers);
+		.json(organizations);
 });
 
 export default router;

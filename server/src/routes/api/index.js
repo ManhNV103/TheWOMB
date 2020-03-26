@@ -1,10 +1,12 @@
 import express from 'express';
-import advertiserRouter from './advertisers';
+import organizationRouter from './organizations';
+import submissionRouter from './submissions';
 import authRouter from './auth';
 
 const router = express.Router();
 
-router.use(advertiserRouter);
+router.use(organizationRouter);
+router.use(submissionRouter);
 router.use(authRouter);
 
 export default router;

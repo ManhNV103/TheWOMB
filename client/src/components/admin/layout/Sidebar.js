@@ -14,9 +14,9 @@ const Sidebar = (props) => {
                 <MenuSection name="Core">
                     <MenuItem name="Dashboard" link="/admin" icon="dashboard" active={props.active} />
                 </MenuSection>
-                <MenuSection name="Other">
-                    <MenuItem name="Advertisers" link="/admin/advertisers" icon="list" active={props.active} />
-                    <MenuItem name="Submissions" link="/admin/submissions" icon="list" active={props.active} />
+                <MenuSection name="Data">
+                    <MenuItem name="Organizations" link="/admin/organizations" icon="building" active={props.active} />
+                    <MenuItem name="Submissions" link="/admin/submissions" icon="write square" active={props.active} />
                 </MenuSection>
             </Menu>
         </div>

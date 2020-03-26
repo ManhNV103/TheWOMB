@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Header } from 'semantic-ui-react';
 import { get } from '../../../services/apiService';
 import Layout from '../layout/Layout';
-import SubmissionList from '../advertisers/AdvertiserList';
+import SubmissionList from '../submissions/SubmissionList';
 
 const Submissions = (props) => {
     const [submissions, setSubmissions] = useState([]);

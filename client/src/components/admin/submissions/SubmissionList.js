@@ -1,13 +1,12 @@
 import React from 'react';
 import { Table, Button } from 'semantic-ui-react';
 
-const AdvertiserList = (props) => {
+const SubmissionList = (props) => {
 
-    const rows = props.advertisers.map(advertiser => {
+    const rows = props.submissions.map(submission => {
         return (
             <Table.Row>
-                <Table.Cell>{ advertiser.id }</Table.Cell>
-                <Table.Cell>{ advertiser.name }</Table.Cell>
+                <Table.Cell>{ submission.id }</Table.Cell>
                 <Table.Cell><Button>Edit</Button></Table.Cell>
             </Table.Row>
         )
@@ -20,7 +19,6 @@ const AdvertiserList = (props) => {
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell>ID</Table.HeaderCell>
-                        <Table.HeaderCell>Name</Table.HeaderCell>
                         <Table.HeaderCell></Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
@@ -32,4 +30,4 @@ const AdvertiserList = (props) => {
     );
 };
 
-export default AdvertiserList;
+export default SubmissionList;

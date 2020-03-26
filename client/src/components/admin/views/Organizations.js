@@ -2,31 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { Container, Header } from 'semantic-ui-react';
 import { get } from '../../../services/apiService';
 import Layout from '../layout/Layout';
-import AdvertiserList from '../advertisers/AdvertiserList';
+import OrganizationList from '../organizations/OrganizationList';
 
-const Advertisers = (props) => {
-    const [advertisers, setAdvertisers] = useState([]);
+const Organizations = (props) => {
+    const [organizations, setOrganizations] = useState([]);
 
     useEffect(() => {
-        const getAdvertisers = async () => {
-            const advertisers = await get('/advertisers');
+        const getOrganizations = async () => {
+            const organizations = await get('/organizations');
 
-            console.log(advertisers);
-
-            setAdvertisers(advertisers);
+            setOrganizations(organizations);
         }
 
-        getAdvertisers()
+        getOrganizations()
     }, [])
     
     return (
         <Layout active={props.match.url}>
             <Container fluid className="content">
                 <Header as="h2">Advertisers</Header>
-                <AdvertiserList advertisers={advertisers} />
+                <OrganizationList organizations={organizations} />
             </Container>
         </Layout>
     );
 };
 
-export default Advertisers;
+export default Organizations;

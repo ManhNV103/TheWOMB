@@ -20,7 +20,7 @@ router.post('/authenticate', (req, res, next) => {
     const { username, password } = req.body;
 
     if(!authenticated(username, password)) {
-        next(createError(401, 'Authentication failed'));
+		return next(createError(401, 'Authentication failed'));
     }
 
     const issuedAt = Math.floor(new Date() / 1000);

@@ -35,7 +35,7 @@ const organizations = [
 ];
 
 /* GET users listing. */
-router.get('/organizations', function(req, res, next) {
+router.get('/organizations', async (req, res, next) => {
 	res
 		.status(200)
 		.json(organizations);

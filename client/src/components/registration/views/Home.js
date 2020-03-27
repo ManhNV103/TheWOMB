@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button } from 'semantic-ui-react';
+import { Header, Button, Segment } from 'semantic-ui-react';
+import ApiContainer from '../blocks/ApiContainer';
 import AdvertiserList from '../AdvertiserList';
 import Layout from '../layout/Layout';
 import useApi from '../../../util/useApi';
@@ -7,17 +8,21 @@ import useApi from '../../../util/useApi';
 let chosenAdvertisers = new Set([]);
 
 const Home = () => {
-  const advertisers = useApi('/advertisers', {}, [])
+  const api = useApi('/organizations', {}, [])
 
   return (
     <Layout>
       <div className="ui container">
-        <p>Please select the advertising avenues from below:</p>
-        <AdvertiserList
-          advertisers={advertisers}
-          chosenAdvertisers={chosenAdvertisers}
-        />
-        <Button primary>Submit</Button>
+        <Header as="h4" className="advertiser-header">Please select the advertising avenues from below:</Header>
+        <ApiContainer api={api}>
+          <AdvertiserList
+            advertisers={api.data}
+            chosenAdvertisers={chosenAdvertisers}
+          />
+        </ApiContainer>
+        <Segment basic vertical textAlign="right">
+          <Button primary>Submit</Button>
+		</Segment>
       </div>
     </Layout>
   );

@@ -5,7 +5,7 @@ const OrganizationList = (props) => {
 
     const rows = props.organizations.map(organization => {
         return (
-            <Table.Row>
+            <Table.Row key={organization.id}>
                 <Table.Cell>{ organization.id }</Table.Cell>
                 <Table.Cell>{ organization.name }</Table.Cell>
                 <Table.Cell><Button>Edit</Button></Table.Cell>

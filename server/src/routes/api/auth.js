@@ -1,7 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import createError from 'http-errors';
-import authenticate from '../../middleware/auth';
+import { getUnixTime, addHours, addDays } from 'date-fns';
 import { ADMIN_USERNAME, ADMIN_PASSWORD, JWT_SECRET } from '../../constants';
 
 const router = express.Router();
@@ -17,18 +17,22 @@ const authenticated = (username, password) => {
 };
 
 router.post('/authenticate', (req, res, next) => {
-    const { username, password } = req.body;
+    const { username, password, rememberMe } = req.body;
 
     if(!authenticated(username, password)) {
 		return next(createError(401, 'Authentication failed'));
     }
 
-    const issuedAt = Math.floor(new Date() / 1000);
+    let expiryAt = getUnixTime(addHours(new Date(), 1));
 
+    if(rememberMe) {
+        expiryAt = getUnixTime(addDays(new Date(), 30));
+    }
+    
     const accessToken = jwt.sign({
         id: 1,
         username: username,
-        issued_at: issuedAt
+        expiry_at: expiryAt
     }, JWT_SECRET);
 
     res.json({

@@ -1,20 +1,19 @@
 import { post } from '../services/apiService';
+import ApiError from '../util/ApiError';
 
-const login = (username, password) => {
+const login = async (username, password, rememberMe = false) => {
     const body = {
         username: username,
-        password: password
+        password: password,
+        rememberMe: rememberMe
     };
 
     try {
-        const { token } = post('/authenticate', body);
+        const { token } = await post('/authenticate', body);
 
         setToken(token);
-
-        return true;
     } catch(e) {
-        console.log(e);
-        return false;
+        throw new ApiError(401, "Login unsuccessful");
     }
 };
 

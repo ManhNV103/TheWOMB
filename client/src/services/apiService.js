@@ -1,4 +1,5 @@
 import ApiError from '../util/ApiError';
+import { getToken, logout } from '../services/authService';
 import { API_BASE } from '../constants';
 
 const defaultOptions = {
@@ -10,9 +11,19 @@ const defaultOptions = {
 }
 
 const request = (url, options) => {
+    const token = getToken();
+
+    if(token) {
+        options.headers['Authorization'] = `Bearer ${token}`;
+    }
+
     const onSuccess = async (resp) => {
         if(!resp.ok) {
             const err = await resp.json();
+
+            if(err.message === 'Token expired') {
+                logout();
+            }
 
             throw new ApiError(err.status, err.message);
         }

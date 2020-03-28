@@ -1,44 +1,44 @@
 import express from 'express';
+import createError from 'http-errors';
+import Organization from '../../models/Organization';
 const router = express.Router();
 
-const organizations = [
-	{
-		id: 1,
-		name: "Goondiwindi Regional Council",
-		image: "goondiwindi_region.png"
-	},
-	{
-		id: 2,
-		name: "7 News Toowomba",
-		image: "7news.png"
-	},
-	{
-		id: 3,
-		name: "Goondiwindi Argus",
-		image: "goondiwindi_argus.png"
-	},
-	{
-		id: 4,
-		name: "Care Goodiwindi",
-		image: "goondiwindi_care.jpg"
-	},
-	{
-		id: 5,
-		name: "Macintyre Gazette",
-		image: "macintyre.png"
-	},
-	{
-		id: 6,
-		name: "Queensland Country Life",
-		image: "qld_country_life.png"
-	}
-];
-
-/* GET users listing. */
 router.get('/organizations', async (req, res, next) => {
-	res
-		.status(200)
-		.json(organizations);
+	const organizations = await Organization.query();
+
+	res.json(organizations);
+});
+
+router.post('/organizations', async (req, res, next) => {
+	const organization = await Organization.query().insertGraph(req.body);
+
+	res.json(organization);
+});
+
+router.get('/organizations/:id', async (req, res, next) => {
+	const organization = await Organization.query().findById(req.params.id);
+
+	if(!organization) {
+		return next(createError(404, 'Organization not found'));
+	}
+
+	res.json(organization);
+});
+
+router.patch('/organizations/:id', async (req, res, next) => {
+	const organization = await Organization
+		.query()
+		.patchAndFetchById(req.params.id, req.body);
+
+	res.json(organization);
+});
+
+router.delete('/organizations/:id', async (req, res, next) => {
+	const numDeleted = await Organization.query().deleteById(req.params.id);
+
+	res.json({
+		numDeleted: numDeleted
+	});
 });
 
 export default router;

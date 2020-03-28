@@ -5,11 +5,15 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
+import { Model } from 'objection';
+import knex from './lib/knex';
 
 import indexRouter from './routes/index';
 import apiRouter from './routes/api';
 
 const app = express();
+
+Model.knex(knex);
 
 app.use(logger('dev'));
 app.use(express.json());

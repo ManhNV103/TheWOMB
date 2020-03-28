@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Container, Card, Header, Form, Input, Checkbox, Button } from 'semantic-ui-react';
 import Layout from '../layout/Layout';
+import Alerts from '../blocks/Alerts';
 import { login, isAuthenticated } from '../../../services/authService';
 
-const Login = (props) => {
+const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
     const [alerts, setAlerts] = useState([]);
     const [redirect, setRedirect] = useState('');
 
@@ -19,17 +21,22 @@ const Login = (props) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(await login(username, password)) {
+        try {
+            await login(username, password, rememberMe);
             setRedirect('/admin');
-        } else {
+        } catch(e) {
             setAlerts([
-                ...alerts, 
                 {
-                    type: 'success',
-                    message: 'BITCH'
+                    type: 'negative',
+                    message: e.message
                 }
             ]);
         }
+    };
+
+    const dismissAlert = (key) => {
+        const updated = alerts.filter((alert, i) => i !== key);
+        setAlerts(updated);
     };
 
     if(redirect) {
@@ -38,13 +45,14 @@ const Login = (props) => {
         return (
             <Layout>
                 <Container>
+                    <Alerts alerts={alerts} onDismiss={dismissAlert} />
                     <Card className="login-container">
                         <Form onSubmit={handleSubmit}>
                             <Header>Admin Login</Header>
-                            <Input fluid value={username} onChange={e => setUsername(e.target.value)} placeholder="Username" />
-                            <Input fluid value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" />
+                            <Input fluid value={username} onChange={e => setUsername(e.target.value)} required placeholder="Username" />
+                            <Input fluid value={password} onChange={e => setPassword(e.target.value)} required type="password" placeholder="Password" />
                             <div className="login-form-buttons">
-                                <Checkbox label="Remember me?" />
+                                <Checkbox label="Remember me?" onChange={() => setRememberMe(!rememberMe)} />
                                 <Button primary className="login-btn">Login</Button>
                             </div>
                         </Form>

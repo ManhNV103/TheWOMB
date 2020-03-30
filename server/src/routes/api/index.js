@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.use(organizationRouter);
 router.use(submissionRouter);
+
 router.use(advertiserRouter);
 router.use(authRouter);
 

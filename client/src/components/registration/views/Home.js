@@ -8,7 +8,7 @@ import useApi from '../../../util/useApi';
 let chosenAdvertisers = new Set([]);
 
 const Home = () => {
-  const api = useApi('/organizations', {}, [])
+  const api = useApi('/advertisers', {}, [])
 
   return (
     <Layout>

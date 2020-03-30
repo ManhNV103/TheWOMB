@@ -36,9 +36,7 @@ const advertisers = [
 
 /* GET users listing. */
 router.get('/advertisers', async (req, res, next) => {
-	res
-		.status(200)
-		.json(advertisers);
+	res.json(advertisers);
 });
 
 export default router;

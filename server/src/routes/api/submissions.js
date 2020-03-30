@@ -1,4 +1,5 @@
 import express from 'express';
+import authenticate from '../../middleware/auth';
 const router = express.Router();
 
 const submissions = [
@@ -19,11 +20,8 @@ const submissions = [
 	}
 ];
 
-/* GET users listing. */
-router.get('/submissions', function(req, res, next) {
-	res
-		.status(200)
-		.json(submissions);
+router.get('/submissions', authenticate, async (req, res, next) => {
+	res.json(submissions);
 });
 
 export default router;

@@ -1,9 +1,7 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { Table, Button, Icon, Image } from 'semantic-ui-react';
 
 const OrganizationList = (props) => {
-	const history = useHistory();
 
     const rows = props.organizations.map(organization => {
         return (
@@ -12,7 +10,7 @@ const OrganizationList = (props) => {
                 <Table.Cell>{ organization.id }</Table.Cell>
                 <Table.Cell>{ organization.name }</Table.Cell>
                 <Table.Cell>
-					<Button onClick={() => { history.push(`/admin/organizations/${organization.id}`) }}>
+					<Button onClick={() => {}}>
 						Edit
 					</Button>
 					<Button negative>Delete</Button>
@@ -38,7 +36,7 @@ const OrganizationList = (props) => {
 				<Table.Footer>
 					<Table.Row>
 						<Table.HeaderCell colSpan="4">
-							<Button positive icon labelPosition="right" floated="right" onClick={() => history.push('/admin/organizations/add')}>
+							<Button positive icon labelPosition="right" floated="right" >
 								Add
 								<Icon name="plus" />
 							</Button>

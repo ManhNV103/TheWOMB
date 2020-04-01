@@ -1,6 +1,6 @@
 import { Model } from 'objection';
 import { format } from 'date-fns';
-import { API_BASE, ORGANIZATION_DIR } from '../constants';
+import { API_BASE, STORAGE_DIR } from '../constants';
 
 class Organization extends Model {
     static get tableName() {
@@ -8,7 +8,7 @@ class Organization extends Model {
 	}
 	
 	getImageFile() {
-		return `${process.cwd()}/${ORGANIZATION_DIR}/${this.id}/${this.image}`;
+		return `${process.cwd()}/${STORAGE_DIR}/${this.id}/${this.image}`;
 	}
 
 	getImageUrl() {

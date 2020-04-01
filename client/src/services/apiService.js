@@ -10,6 +10,10 @@ const defaultOptions = {
     }
 }
 
+const getUrl = (endpoint) => {
+    return API_BASE + '/' + endpoint.replace(/^\//, '');;
+};
+
 const request = (url, options) => {
     const token = getToken();
 
@@ -58,7 +62,7 @@ const get = (endpoint, options = {}) => {
         ...options
     };
 
-    const url = API_BASE + '/' + endpoint.replace(/^\//, '');;
+    const url = getUrl(endpoint);
 
     return request(url, requestOptions);
 };
@@ -71,12 +75,42 @@ const post = (endpoint, body, options = {}) => {
         ...options
     };
 
-    const url = API_BASE + '/' + endpoint.replace(/^\//, '');
+    const url = getUrl(endpoint);
 
     return request(url, requestOptions);
 };
 
+const deleteResource = (endpoint, options = {}) => {
+    const requestOptions = {
+        ...defaultOptions,
+        method: 'DELETE',
+        ...options
+    };
+
+    const url = getUrl(endpoint);
+
+    return request(url, requestOptions);
+};
+
+const postFile = (endpoint, file, options = {}) => {
+    const body = new FormData();
+    body.append('file', file);
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {},
+        body: body,
+        ...options
+    }
+
+    const url = getUrl(endpoint)
+
+    return request(url, requestOptions);
+}
+
 export {
     get,
-    post
+    post,
+    deleteResource,
+    postFile
 };

@@ -18,7 +18,7 @@ const Organizations = (props) => {
             <Container fluid className="content">
                 <Header className="page-header" as="h2">Organizations</Header>
 				<Breadcrumb icon="right angle" sections={sections} />
-                <OrganizationList organizations={api.data} />
+                <OrganizationList api={api} />
             </Container>
         </Layout>
     );

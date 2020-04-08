@@ -80,6 +80,19 @@ const post = (endpoint, body, options = {}) => {
     return request(url, requestOptions);
 };
 
+const patch = (endpoint, body, options = {}) => {
+    const requestOptions = {
+        ...defaultOptions,
+        method: 'PATCH',
+        body: JSON.stringify(body),
+        ...options
+    };
+
+    const url = getUrl(endpoint);
+
+    return request(url, requestOptions);
+};
+
 const deleteResource = (endpoint, options = {}) => {
     const requestOptions = {
         ...defaultOptions,
@@ -110,7 +123,8 @@ const postFile = (endpoint, file, options = {}) => {
 
 export {
     get,
-    post,
+	post,
+	patch,
     deleteResource,
     postFile
 };

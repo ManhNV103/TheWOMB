@@ -40,7 +40,7 @@ const OrganizationList = (props) => {
 				<Table.Footer>
 					<Table.Row>
 						<Table.HeaderCell colSpan="4">
-							<Button positive icon labelPosition="right" floated="right" onClick={() => history.push('/admin/organizations/new')}>
+							<Button positive icon labelPosition="right" floated="right" onClick={() => history.push('/admin/organizations/add')}>
 								Add
 								<Icon name="plus" />
 							</Button>

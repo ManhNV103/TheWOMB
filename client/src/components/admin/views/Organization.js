@@ -13,7 +13,13 @@ const breadcrumbs = [
 
 const Organization = (props) => {
 	const { id } = props.match.params;
-	const api = useApi(`/organizations/${id}`, {}, {});
+
+	const api = useApi(`/organizations/${id}`, {}, {
+		id: -1,
+		name: '',
+		image: '',
+		config_file: ''
+	});
 
 	return (
 		<Layout active={props.match.url}>
@@ -21,7 +27,7 @@ const Organization = (props) => {
 				<Header className="page-header" as="h2">Organization{ api.data.id ? ` #${api.data.id}` : '' }</Header>
 				<Breadcrumb icon="right angle" sections={breadcrumbs}/>
 				<Segment>
-					<OrganizationForm organization={api.data} />
+					<OrganizationForm api={api} />
 				</Segment>
 			</Container>
 		</Layout>

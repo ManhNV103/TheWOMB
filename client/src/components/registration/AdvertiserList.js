@@ -3,6 +3,7 @@ import { Grid } from 'semantic-ui-react';
 import Advertiser from './Advertiser';
 
 const AdvertiserList = (props) => {
+	const advertisers = props.api.data;
 	const [selected, setSelected] = useState([]);
 	const imagesPerRow = 5;
 
@@ -17,8 +18,8 @@ const AdvertiserList = (props) => {
 
 	let advertiserList = null;
 
-	if (props.advertisers.length) {
-		advertiserList = props.advertisers.map(advertiser => {
+	if (advertisers.length) {
+		advertiserList = advertisers.map(advertiser => {
 			return (
 				<Grid.Column key={advertiser.id}>
 					<Advertiser
@@ -32,7 +33,6 @@ const AdvertiserList = (props) => {
 			);
 		});
 	}
-
 
 	return (
 		<Grid doubling columns={imagesPerRow} className="advertiser-list">

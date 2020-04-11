@@ -4,7 +4,7 @@ import PrivateRoute from './util/PrivateRoute';
 import Dashboard from './views/Dashboard';
 import Organizations from './views/Organizations';
 import Organization from './views/Organization';
-import NewOrganization from './views/NewOrganization';
+import AddOrganization from './views/AddOrganization';
 import Submissions from './views/Submissions';
 
 const Admin = (props) => {
@@ -14,8 +14,8 @@ const Admin = (props) => {
         <div>
             <PrivateRoute exact path={prefix} component={Dashboard} />
             <PrivateRoute exact path={`${prefix}/organizations`} component={Organizations} />
-			<PrivateRoute exact path={`${prefix}/organizations/new`} component={NewOrganization} />
-			<PrivateRoute exact path={`${prefix}/organizations/:id`} component={Organization} />
+			<PrivateRoute exact path={`${prefix}/organizations/:id(\\d+)`} component={Organization} />
+			<PrivateRoute exact path={`${prefix}/organizations/add`} component={AddOrganization} />
             <PrivateRoute exact path={`${prefix}/submissions`} component={Submissions} />
         </div>
     )

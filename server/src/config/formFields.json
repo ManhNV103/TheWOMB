@@ -1,0 +1,24 @@
+{
+    "form": {
+        "fields": [
+            {
+                "name": "INPUT"
+            },
+            {
+                "name": "SELECT"
+            }
+        ],
+        "default": [
+            {
+                "field": "INPUT",
+                "name": "Name",
+                "required": true
+            },
+            {
+                "field": "INPUT",
+                "name": "Name",
+                "required": true
+            }
+        ]
+    }
+}

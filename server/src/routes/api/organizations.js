@@ -2,7 +2,7 @@ import express from 'express';
 import createError from 'http-errors';
 import Organization from '../../models/Organization';
 import authenticate from '../../middleware/auth';
-import { uploadFile } from '../../services/fileService';
+import { uploadFile, deleteFile, deleteFolder } from '../../services/fileService';
 const router = express.Router();
 
 router.get('/organizations', authenticate, async (req, res, next) => {
@@ -29,6 +29,8 @@ router.get('/organizations/:id', authenticate, async (req, res, next) => {
 		return next(createError(404, 'Organization not found'));
 	}
 
+	organization.image = organization.getImageUrl()
+
 	res.json(organization);
 });
 
@@ -41,7 +43,18 @@ router.patch('/organizations/:id', authenticate, async (req, res, next) => {
 });
 
 router.delete('/organizations/:id', authenticate, async (req, res, next) => {
-	const numDeleted = await Organization.query().deleteById(req.params.id);
+	const id = req.params.id;
+	const organization = await Organization.query().findById(id);
+
+	if(!organization) {
+		return next(createError(404, 'Organization not found'));
+	}
+
+	deleteFile(organization.image, organization);
+	deleteFile(organization.config_file, organization);
+	deleteFolder(organization);
+
+	const numDeleted = await Organization.query().deleteById(id);
 
 	res.json({
 		numDeleted: numDeleted

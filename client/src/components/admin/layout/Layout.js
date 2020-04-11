@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import AlertsProvider from '../../../context/AlertsContext';
+import Alerts from '../blocks/Alerts';
 import Sidebar from './Sidebar';
 import TopMenu from './TopMenu';
 
@@ -13,15 +15,18 @@ const Layout = ({ active, children }) => {
     };
 
     return (
-        <div className="admin">
-            <Sidebar active={active} hidden={hidden} />
-            <div className="content-container">
-                <TopMenu hidden={hidden} onToggleSidebar={onToggleSidebar} />
-                <div className="ui vertical segment content">
-                    { children }
+        <AlertsProvider>
+            <div className="admin">
+                <Sidebar active={active} hidden={hidden} />
+                <div className="content-container">
+                    <TopMenu hidden={hidden} onToggleSidebar={onToggleSidebar} />
+                    <div className="ui vertical segment content">
+                        <Alerts />
+                        { children }
+                    </div>
                 </div>
             </div>
-        </div>
+        </AlertsProvider>
     );
 };
 

@@ -9,19 +9,21 @@ const useApi = (end, opt = {}, init = null) => {
 	const [error, setError] = useState('')
 
 	useEffect(() => {
-		const fetchResponse = async (endpoint, options) => {
-			setLoading(true)
-			try {
-				const json = await get(endpoint, options);
-				setData(json);
-				setError('');
-			} catch(e) {
-				setData(init);
-				setError(e.message);
+		if(endpoint) {
+			const fetchResponse = async (endpoint, options) => {
+				setLoading(true)
+				try {
+					const json = await get(endpoint, options);
+					setData(json);
+					setError('');
+				} catch(e) {
+					setData(init);
+					setError(e.message);
+				}
+				setLoading(false);
 			}
-			setLoading(false);
+			fetchResponse(endpoint, options);
 		}
-		fetchResponse(endpoint, options);
 	// eslint-disable-next-line
 	}, [endpoint, options]);
 
@@ -30,7 +32,9 @@ const useApi = (end, opt = {}, init = null) => {
 		loading: loading,
 		error: error,
 		setEndpoint: setEndpoint,
-		setOptions: setOptions
+		setOptions: setOptions,
+		setData: setData,
+		setError: setError
 	};
 };
 

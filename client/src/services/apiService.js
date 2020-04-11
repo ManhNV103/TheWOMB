@@ -7,11 +7,32 @@ const defaultOptions = {
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-    }
-}
+    },
+    timeout: 30000
+};
 
 const getUrl = (endpoint) => {
     return API_BASE + '/' + endpoint.replace(/^\//, '');;
+};
+
+const fetchTimeout = (url, options = {}) => {
+    const timeout = options.timeout;
+    if(options.signal) {
+        throw new Error("Signal not supported in timeoutable fetch");
+    }
+
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    return new Promise((resolve, reject) => {
+        const timer = setTimeout(() => {
+            reject(new Error("Timeout reached fetching API"))
+            controller.abort();
+        }, timeout);
+        return fetch(url, { signal, ...options })
+            .finally(() => clearTimeout(timer))
+            .then(resolve, reject);
+    });
 };
 
 const request = (url, options) => {
@@ -51,7 +72,7 @@ const request = (url, options) => {
         }
     }
 
-    return fetch(url, options)
+    return fetchTimeout(url, options)
         .then(onSuccess)
         .catch(onError);
 };

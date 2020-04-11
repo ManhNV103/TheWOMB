@@ -1,72 +1,108 @@
-import React, { useState } from 'react';
-import { Form, Input, Button } from 'semantic-ui-react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Form, Input, Button, Image } from 'semantic-ui-react';
 import { post, patch, postFile } from '../../../services/apiService';
-import Alerts from '../../registration/blocks/Alerts';
+import { AlertsContext } from '../../../context/AlertsContext';
 
 const OrganizationForm = (props) => {
-	const org = props.organization;
+	const org = props.api.data;
+	const history = useHistory();
+	const imageInput = useRef(null);
+	const configFileInput = useRef(null);
+	const { addAlert } = useContext(AlertsContext);
+	const [organization, setOrganization] = useState({
+		id: -1,
+		name: '',
+		image: '',
+		config_file: ''
+	});
 
-	const [id, setId] = useState(org.id ? org.id : 0);
-	const [name, setName] = useState(org.name ? org.name : '');
-	const [image, setImage] = useState('');
-	const [configFile, setConfigFile] = useState('');
-    const [alerts, setAlerts] = useState([]);
+	useEffect(() => {
+		setOrganization({
+			id: org.id,
+			name: org.name,
+			image: org.image,
+			config_file: org.config_file
+		});
+	}, [org]);
+
+	const updateOrganization = (key, value) => {
+		organization[key] = value;
+
+		setOrganization({...organization});
+	}
 
 	const handleSubmit = async (e) => {
 		try {
-			let organization = {};
+			let id = organization.id;
 
-			if(id === 0) {
-				try {
-					organization = await post('/organizations', {
-						name: name
-					});
+			if(organization.id === -1) {
+				const newOrg = await post('/organizations', {
+					name: organization.name
+				});
 
-					setId(organization.id);
+				id = newOrg.id;
 
-					setAlerts([...alerts, {
-						type: 'positive',
-						message: 'Organization created successfully'
-					}]);
-				} catch(e) {
-					setAlerts([{
-						type: 'negative',
-						message: e.message
-					}])
-					return;
-				}
+				history.push(`/admin/organizations/${id}`);
 			} else {
-				organization = await patch(`organizations/${id}`, {
-					name: name
+				const newOrg = await patch(`/organizations/${organization.id}`, {
+					name: organization.name
+				});
+
+				props.api.setData(newOrg);
+
+				addAlert({
+					type: 'positive',
+					message: 'Organization updated successfully'
 				});
 			}
 
-			await postFile(`/organizations/${id}/upload/image`, image);
-			await postFile(`/organizations/${id}/upload/configFile`, configFile);
-		} catch(e) {
+			if(organization.image) {
+				await postFile(`/organizations/${id}/upload/image`, organization.image);
+				props.api.setOptions({});
+				imageInput.current.value = null;
 
+				addAlert({
+					type: 'positive',
+					message: 'Image updated successfully'
+				});
+			}
+			if(organization.config_file) {
+				await postFile(`/organizations/${id}/upload/configFile`, organization.config_file);
+				props.api.setOptions({});
+				configFileInput.current.value = null;
+
+				addAlert({
+					type: 'positive',
+					message: 'Config file updated successfully'
+				});
+			}
+		} catch(e) {
+			addAlert({
+				type: 'negative',
+				message: e.message
+			});
+			return;
 		}
 	};
 
-	const dismissAlert = (key) => {
-        const updated = alerts.filter((alert, i) => i !== key);
-        setAlerts(updated);
-	};
+	const imageDom = org.image ? (<Image size="medium" src={org.image} />) : null;
 
 	return (
 		<Form onSubmit={handleSubmit}>
-			<Alerts alerts={alerts} onDismiss={dismissAlert} />
 			<Form.Field>
 				<label>Name</label>
-				<Input value={name} onChange={(e) => setName(e.target.value)} required />
+				<Input value={organization.name} onChange={(e) => updateOrganization('name', e.target.value)} required />
 			</Form.Field>
 			<Form.Field>
 				<label>Image</label>
-				<input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])}  required />
+				{ imageDom }
+				<input type="file" accept="image/*" onChange={(e) => updateOrganization('image', e.target.files[0])} ref={imageInput} />
 			</Form.Field>
 			<Form.Field>
 				<label>Config File (yaml)</label>
-				<input type="file" onChange={(e) => setConfigFile(e.target.files[0])} required />
+				<p>{ org.config_file }</p>
+				<input type="file" onChange={(e) => updateOrganization('config_file', e.target.files[0])} ref={configFileInput} />
 			</Form.Field>
 			<Button primary>Save</Button>
 		</Form>

@@ -27,7 +27,7 @@ const AdvertiserList = (props) => {
 						name={advertiser.name}
 						image={advertiser.image}
 						onSelect={onSelect}
-						chosenAdvertisers={props.chosenAdvertisers}
+						selected={props.selected}
 					/>
 				</Grid.Column>
 			);
@@ -36,7 +36,7 @@ const AdvertiserList = (props) => {
 
 	return (
 		<Grid doubling columns={imagesPerRow} className="advertiser-list">
-			{advertiserList}
+			{ advertiserList }
 		</Grid>
 	);
 };

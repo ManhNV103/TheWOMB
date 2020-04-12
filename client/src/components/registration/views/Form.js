@@ -1,20 +1,24 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Header, Segment, Button } from 'semantic-ui-react';
-import useApi from '../../../util/useApi';
 import Layout from '../layout/Layout';
-import ApiContainer from '../blocks/ApiContainer';
 import FormFactory from '../form/FormFactory';
 
-const Form = () => {
-    const api = useApi('/advertisers/form');
+const Form = (props) => {
+    const history = useHistory();
+
+    if(!props.location.state) {
+        history.push('/');
+        return null;
+    }
+
+    const selected = props.location.state.selected;
 
     return (
         <Layout>
             <div className="ui container">
                 <Header></Header>
-                <ApiContainer api={api}>
-                    <FormFactory api={api} />
-                </ApiContainer>
+                <FormFactory selected={selected} />
                 <Segment basic vertical textAlign="right">
                     <Button primary>Submit</Button>
                 </Segment>

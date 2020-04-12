@@ -8,9 +8,9 @@ const Advertiser = (props) => {
     props.onSelect(props.id);
 
     if (!selected) {
-      props.chosenAdvertisers.add(props.id);
+      props.selected.add(props.id);
     } else {
-      props.chosenAdvertisers.delete(props.id);
+      props.selected.delete(props.id);
     }
   };
 

@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Grid } from 'semantic-ui-react';
 import Advertiser from './Advertiser';
+import { SelectedContext } from '../../../context/SelectedContext';
 
 const AdvertiserList = (props) => {
-	const advertisers = props.api.data;
-	const [selected, setSelected] = useState([]);
+    const advertisers = props.api.data;
+    const { selected, addOrganization, removeOrganization } = useContext(SelectedContext);
 	const imagesPerRow = 5;
 
-	const onSelect = id => {
-		let index = selected.indexOf(id);
-		if (index < 0) {
-			setSelected([...selected, id]);
+	const onSelect = (id) => {
+		if(!selected.has(id)) {
+			addOrganization(id);
 		} else {
-			setSelected(selected.filter(value => value !== id));
+			removeOrganization(id);
 		}
 	};
 

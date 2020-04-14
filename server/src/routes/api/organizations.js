@@ -2,7 +2,7 @@ import express from 'express';
 import createError from 'http-errors';
 import Organization from '../../models/Organization';
 import authenticate from '../../middleware/auth';
-import { uploadFile, deleteFile, deleteFolder } from '../../services/fileService';
+import { uploadFile, deleteFile, deleteFolder } from '../../services/FileService';
 const router = express.Router();
 
 router.get('/organizations', authenticate, async (req, res, next) => {
@@ -16,15 +16,16 @@ router.get('/organizations', authenticate, async (req, res, next) => {
 
 router.post('/organizations', async (req, res, next) => {
 	const organization = await Organization.query().insertGraph({
-		name: req.body.name
+        name: req.body.name,
+        disabled: req.body.disabled
 	});
 
 	res.json(organization);
 });
 
 router.get('/organizations/:id', authenticate, async (req, res, next) => {
-	const organization = await Organization.query().findById(req.params.id);
-
+    const organization = await Organization.query().findById(req.params.id);
+    
 	if(!organization) {
 		return next(createError(404, 'Organization not found'));
 	}
@@ -38,6 +39,8 @@ router.patch('/organizations/:id', authenticate, async (req, res, next) => {
 	const organization = await Organization
 		.query()
 		.patchAndFetchById(req.params.id, req.body);
+
+    organization.image = organization.getImageUrl()
 
 	res.json(organization);
 });
@@ -83,7 +86,7 @@ router.post('/organizations/:id/upload/image', authenticate, async (req, res, ne
 router.post('/organizations/:id/upload/configFile', authenticate, async (req, res, next) => {
 	let organization = await Organization.query().findById(req.params.id);
 	const configFile = req.files.file;
-	const filename = 'config.yaml';
+	const filename = 'config.json';
 
 	if(!organization) {
 		return next(createError(404, 'Organization not found'));

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Form, Input, Button, Image } from 'semantic-ui-react';
+import { Form, Input, Button, Checkbox, Image } from 'semantic-ui-react';
 import { post, patch, postFile } from '../../../services/apiService';
 import { AlertsContext } from '../../../context/AlertsContext';
 
@@ -14,15 +14,16 @@ const OrganizationForm = (props) => {
 		id: -1,
 		name: '',
 		image: '',
-		config_file: ''
-	});
-
+        config_file: '',
+        disabled: false
+    });
+    
 	useEffect(() => {
 		setOrganization({
 			id: org.id,
 			name: org.name,
-			image: org.image,
-			config_file: org.config_file
+            config_file: org.config_file,
+            disabled: org.disabled
 		});
 	}, [org]);
 
@@ -38,7 +39,8 @@ const OrganizationForm = (props) => {
 
 			if(organization.id === -1) {
 				const newOrg = await post('/organizations', {
-					name: organization.name
+                    name: organization.name,
+                    disabled: organization.disabled
 				});
 
 				id = newOrg.id;
@@ -46,7 +48,8 @@ const OrganizationForm = (props) => {
 				history.push(`/admin/organizations/${id}`);
 			} else {
 				const newOrg = await patch(`/organizations/${organization.id}`, {
-					name: organization.name
+                    name: organization.name,
+                    disabled: organization.disabled
 				});
 
 				props.api.setData(newOrg);
@@ -100,10 +103,14 @@ const OrganizationForm = (props) => {
 				<input type="file" accept="image/*" onChange={(e) => updateOrganization('image', e.target.files[0])} ref={imageInput} />
 			</Form.Field>
 			<Form.Field>
-				<label>Config File (yaml)</label>
+				<label>Config File (.json)</label>
 				<p>{ org.config_file }</p>
 				<input type="file" onChange={(e) => updateOrganization('config_file', e.target.files[0])} ref={configFileInput} />
 			</Form.Field>
+            <Form.Field>
+                <label>Disabled</label>
+                <Checkbox toggle checked={organization.disabled} onChange={(e, { checked } ) => updateOrganization('disabled', checked)} />
+            </Form.Field>
 			<Button primary>Save</Button>
 		</Form>
 	);

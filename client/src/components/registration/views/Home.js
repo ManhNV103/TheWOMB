@@ -2,6 +2,7 @@ import React from 'react';
 import useApi from '../../../util/useApi';
 import AdvertiserSelector from '../advertisers/AdvertiserSelector';
 import Layout from '../layout/Layout';
+import SelectedProvider from '../../../context/SelectedContext';
 
 const Home = () => {
     const api = useApi('/advertisers', {}, []);
@@ -9,7 +10,9 @@ const Home = () => {
     return (
         <Layout>
             <div className="ui container">
-                <AdvertiserSelector api={api} />
+                <SelectedProvider>
+                    <AdvertiserSelector api={api} />
+                </SelectedProvider>
             </div>
         </Layout>
     );

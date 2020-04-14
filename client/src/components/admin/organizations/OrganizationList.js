@@ -25,6 +25,7 @@ const OrganizationList = (props) => {
 						<Table.HeaderCell>Image</Table.HeaderCell>
                         <Table.HeaderCell>ID</Table.HeaderCell>
                         <Table.HeaderCell>Name</Table.HeaderCell>
+                        <Table.HeaderCell>Disabled</Table.HeaderCell>
                         <Table.HeaderCell>Actions</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
@@ -33,13 +34,13 @@ const OrganizationList = (props) => {
                         rows.length > 0 ?
                         rows :
                         <Table.Row>
-                            <Table.Cell colSpan="5" className="centered">No organizations found</Table.Cell>
+                            <Table.Cell colSpan="6" className="centered">No organizations found</Table.Cell>
                         </Table.Row>
                     }
                 </Table.Body>
 				<Table.Footer>
 					<Table.Row>
-						<Table.HeaderCell colSpan="4">
+						<Table.HeaderCell colSpan="5">
 							<Button positive icon labelPosition="right" floated="right" onClick={() => history.push('/admin/organizations/add')}>
 								Add
 								<Icon name="plus" />

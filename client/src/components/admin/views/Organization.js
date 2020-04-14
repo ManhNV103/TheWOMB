@@ -18,7 +18,8 @@ const Organization = (props) => {
 		id: -1,
 		name: '',
 		image: '',
-		config_file: ''
+        config_file: '',
+        disabled: false
 	});
 
 	return (

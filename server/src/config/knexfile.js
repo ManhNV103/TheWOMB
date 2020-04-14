@@ -7,7 +7,13 @@ module.exports = {
     user:     DB_USERNAME,
     password: DB_PASSWORD,
     database: DB_DATABASE,
-    dateStrings: true
+    dateStrings: true,
+    typeCast: (field, next) => {
+        if(field.type == 'TINY' && field.length == 1) {
+            return (field.string() == '1');
+        }
+        return next();
+    }
   },
   migrations: {
     directory: '../migrations',

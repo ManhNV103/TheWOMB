@@ -3,18 +3,19 @@ import React, { createContext, useState } from 'react';
 const SelectedProvider =  ({ children }) => {
     const [selected, setSelected] = useState(new Set([]));
 
-    const addAlert = (alert) => {
+    const addOrganization = (id) => {
+        setSelected(new Set(selected.add(id)));
     };
 
-    const removeAlert = (key) => {
-        const updated = alerts.filter((alert, i) => i !== key);
-        setAlerts(updated);
+    const removeOrganization = (id) => {
+        selected.delete(id);
+        setSelected(new Set(selected));
     }
 
     return (
-        <AlertsContext.Provider value={{alerts, addAlert, removeAlert}}>
+        <SelectedContext.Provider value={{selected, addOrganization, removeOrganization}}>
             { children }
-        </AlertsContext.Provider>
+        </SelectedContext.Provider>
     )
 };
 

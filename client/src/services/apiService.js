@@ -85,11 +85,11 @@ const get = (endpoint, options = {}) => {
 
     let url = getUrl(endpoint);
 
-    if(options.params) {
+    if(options.query) {
         url = new URL(url);
 
-        Object.keys(options.params).forEach((key) => {
-            return url.searchParams.append(key, options.params[key]);
+        Object.keys(options.query).forEach((key) => {
+            return url.searchParams.append(key, options.query[key]);
         });
     }
 

@@ -5,10 +5,9 @@ import fields from './fields';
 import useApi from '../../../util/useApi';
 
 const FormFactory = (props) => {
-    const selected = props.selected;
     const api = useApi('/advertisers/form', {
-        params: {
-            selected: Array.from(selected)
+        query: {
+            selected: Array.from(props.selected)
         }
     });
 
@@ -18,9 +17,9 @@ const FormFactory = (props) => {
         return <div></div>;
     }
 
-    const formDom = form.fields.map((field) => {
+    const formDom = form.fields.map((field, key) => {
         return (
-            <Field as={fields[field.field]} data={field} />
+            <Field key={key} as={fields[field.component]} data={field} />
         );
     });
 

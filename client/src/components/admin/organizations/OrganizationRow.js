@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Table, Button, Confirm, Image } from 'semantic-ui-react'
+import { Table, Button, Confirm, Image, Label } from 'semantic-ui-react'
 import { deleteResource } from '../../../services/apiService';
 
 const OrganizationRow = (props) => {
@@ -31,6 +31,13 @@ const OrganizationRow = (props) => {
             <Table.Cell><Image size="tiny" src={organization.image}></Image></Table.Cell>
             <Table.Cell>{ organization.id }</Table.Cell>
             <Table.Cell>{ organization.name }</Table.Cell>
+            <Table.Cell>
+                {
+                    organization.disabled ?
+                    <Label color="red">Disabled</Label> :
+                    <Label color="green">Enabled</Label>
+                }
+            </Table.Cell>
             <Table.Cell>
                 <Button onClick={() => history.push(`/admin/organizations/${organization.id}`)}>
                     Edit

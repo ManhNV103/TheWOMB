@@ -33,7 +33,7 @@ class Organization extends Model {
     }
     
     fetchForm() {
-        return this.getConfigFile();
+        return this.getConfigFile().form;
     }
 
     $beforeInsert() {

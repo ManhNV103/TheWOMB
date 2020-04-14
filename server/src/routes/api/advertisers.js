@@ -1,10 +1,15 @@
 import express from 'express';
 import createError from 'http-errors';
 import Organization from '../../models/Organization';
+import { generateForm } from '../../services/FormService';
 const router = express.Router();
 
 router.get('/advertisers', async (req, res, next) => {
-	const organizations = await (await Organization.query()).map(organization => {
+    const organizations = await Organization
+        .query()
+        .where('disabled', '=', 0);
+
+	const result = await organizations.map(organization => {
 		return {
 			id: organization.id,
 			name: organization.name,
@@ -12,27 +17,37 @@ router.get('/advertisers', async (req, res, next) => {
 		};
 	});
 
-	res.json(organizations);
+	res.json(result);
 });
 
 router.get('/advertisers/form', async (req, res, next) => {
-    const ids = req.body.advertisers;
+    const ids = req.query.selected.split(',');
 
-    const organizations = await Organization.query().where('id', 'in', ids);
+    if(!ids || ids.length <= 0) {
+        return next(createError(500, 'Advertiser array not supplied'));
+    }
 
+    const advertisers = await Organization.query().whereIn('id', ids);
 
+    try {
+        const form = generateForm(advertisers);
 
-    res.json(form);
+        res.json({
+                fields: form.fields
+        });
+    } catch(e) {
+        return next(createError(500, e.message));
+    }
 });
 
 router.get('/advertisers/:id', async (req, res, next) => {
-	const organization = await Organization.query().findById(req.params.id);
-	
-	organization.form = organization.fetchForm();
+    const organization = await Organization.query().findById(req.params.id);
 
 	if(!organization) {
 		return next(createError(404, "Advertiser not found"));
 	}
+	
+	organization.form = organization.fetchForm();
 
 	res.json(organization);
 });

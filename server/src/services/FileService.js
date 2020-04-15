@@ -1,9 +1,12 @@
 import fs from 'fs';
-import path from 'path';
 import { STORAGE_DIR } from '../constants';
 
 const uploadFile = (file, name, organization) => {
-    file.mv(`${STORAGE_DIR}/${organization.id}/${name}`);
+    try {
+        file.mv(`${STORAGE_DIR}/${organization.id}/${name}`);
+    } catch(e) {
+        console.log(e.message);
+    }
 };
 
 const deleteFile = (name, organization) => {

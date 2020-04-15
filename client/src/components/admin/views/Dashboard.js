@@ -42,7 +42,7 @@ const Dashboard = (props) => {
                     <Card>
                         <Card.Content className="centered">
                             <Statistic>
-                                <Statistic.Label>Memes</Statistic.Label>
+                                <Statistic.Label>Other</Statistic.Label>
                                 <Statistic.Value>1,000</Statistic.Value>
                             </Statistic>
                         </Card.Content>

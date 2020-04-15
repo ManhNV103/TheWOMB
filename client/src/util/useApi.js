@@ -1,12 +1,24 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import { get } from '../services/apiService';
+import ApiContext from '../context/ApiContext';
 
 const useApi = (end, opt = {}, init = null) => {
-	const [endpoint, setEndpoint] = useState(end);
-	const [options, setOptions] = useState(opt);
-	const [data, setData] = useState(init);
-	const [loading, setLoading] = useState(false)
-	const [error, setError] = useState('')
+    const {
+        endpoint,
+        options,
+        data,
+        loading,
+        error,
+        setEndpoint,
+        setOptions,
+        setData,
+        setLoading,
+        setError
+    } = useContext(ApiContext);
+
+    setEndpoint(end);
+    setOptions({});
+    setData(init);
 
 	useEffect(() => {
 		if(endpoint) {
@@ -34,7 +46,8 @@ const useApi = (end, opt = {}, init = null) => {
 		setEndpoint: setEndpoint,
 		setOptions: setOptions,
 		setData: setData,
-		setError: setError
+        setError: setError,
+        setLoading: setLoading
 	};
 };
 

@@ -2,9 +2,11 @@ import React from 'react';
 import { Segment, Dimmer, Loader } from 'semantic-ui-react';
 
 const ApiContainer = (props) => {
+    const options = props.options ?? {};
+
     if(props.api.loading) {
         return (
-            <Segment basic style={{height: '5rem'}}>
+            <Segment {...options} style={{minHeight: '5rem'}}>
                 <Dimmer inverted active>
                     <Loader inverted>Loading...</Loader>
                 </Dimmer>
@@ -13,7 +15,7 @@ const ApiContainer = (props) => {
         );
     } else {
         return (
-            <Segment basic>
+            <Segment {...options}>
                 {props.children}
             </Segment>
         );

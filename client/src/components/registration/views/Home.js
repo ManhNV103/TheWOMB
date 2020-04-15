@@ -3,16 +3,17 @@ import useApi from '../../../util/useApi';
 import AdvertiserSelector from '../advertisers/AdvertiserSelector';
 import Layout from '../layout/Layout';
 import SelectedProvider from '../../../context/SelectedContext';
+import ApiProvider from '../../../context/ApiContext';
 
 const Home = () => {
-    const api = useApi('/advertisers', {}, []);
-
     return (
         <Layout>
             <div className="ui container">
-                <SelectedProvider>
-                    <AdvertiserSelector api={api} />
-                </SelectedProvider>
+                <ApiProvider>
+                    <SelectedProvider>
+                        <AdvertiserSelector api={api} />
+                    </SelectedProvider>
+                </ApiProvider>
             </div>
         </Layout>
     );

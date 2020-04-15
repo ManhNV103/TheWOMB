@@ -34,6 +34,7 @@ const OrganizationForm = (props) => {
 	}
 
 	const handleSubmit = async (e) => {
+        props.api.setLoading(true);
 		try {
 			let id = organization.id;
 
@@ -63,7 +64,8 @@ const OrganizationForm = (props) => {
 			if(organization.image) {
 				await postFile(`/organizations/${id}/upload/image`, organization.image);
 				props.api.setOptions({});
-				imageInput.current.value = null;
+                imageInput.current.value = null;
+                organization.image = null;
 
 				addAlert({
 					type: 'positive',
@@ -85,8 +87,8 @@ const OrganizationForm = (props) => {
 				type: 'negative',
 				message: e.message
 			});
-			return;
-		}
+        }
+        props.api.setLoading(false);
 	};
 
 	const imageDom = org.image ? (<Image size="medium" src={org.image} />) : null;

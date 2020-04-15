@@ -6,7 +6,7 @@ import AdvertiserList from '../advertisers/AdvertiserList';
 import { SelectedContext } from '../../../context/SelectedContext';
 
 const AdvertiserSelector = (props) => {
-    const api = props.api;
+    const api = useApi('/advertisers');
     const history = useHistory();
     const { selected } = useContext(SelectedContext);
 
@@ -24,7 +24,7 @@ const AdvertiserSelector = (props) => {
     return (
         <div>
             <Header as="h4" className="advertiser-header">Please select the advertising avenues from below:</Header>
-                <ApiContainer api={api}>
+                <ApiContainer api={api} options={{ vertical: 'vertical', basic: 'basic' }}>
                     <AdvertiserList
                         api={api}
                         selected={selected}

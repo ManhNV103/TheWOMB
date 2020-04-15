@@ -15,7 +15,7 @@ const getUrl = (endpoint) => {
     return API_BASE + '/' + endpoint.replace(/^\//, '');;
 };
 
-const fetchTimeout = (url, options = {}) => {
+/*const fetchTimeout = (url, options = {}) => {
     const timeout = options.timeout;
     if(options.signal) {
         throw new Error("Signal not supported in timeoutable fetch");
@@ -33,7 +33,7 @@ const fetchTimeout = (url, options = {}) => {
             .finally(() => clearTimeout(timer))
             .then(resolve, reject);
     });
-};
+};*/
 
 const request = (url, options) => {
     const token = getToken();
@@ -72,7 +72,7 @@ const request = (url, options) => {
         }
     }
 
-    return fetchTimeout(url, options)
+    return fetch(url, options)
         .then(onSuccess)
         .catch(onError);
 };

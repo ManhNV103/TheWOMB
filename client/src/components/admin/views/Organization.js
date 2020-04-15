@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Header, Breadcrumb, Segment } from 'semantic-ui-react';
+import { Container, Header, Breadcrumb } from 'semantic-ui-react';
 import useApi from '../../../util/useApi';
 import Layout from '../layout/Layout';
+import ApiContainer from '../blocks/ApiContainer';
 import OrganizationForm from '../organizations/OrganizationForm';
 
 const breadcrumbs = [
@@ -27,9 +28,9 @@ const Organization = (props) => {
 			<Container fluid>
 				<Header className="page-header" as="h2">Organization{ api.data.id ? ` #${api.data.id}` : '' }</Header>
 				<Breadcrumb icon="right angle" sections={breadcrumbs}/>
-				<Segment>
-					<OrganizationForm api={api} />
-				</Segment>
+                <ApiContainer api={api}>
+                    <OrganizationForm api={api} />
+                </ApiContainer>
 			</Container>
 		</Layout>
 	);

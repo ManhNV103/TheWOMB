@@ -6,6 +6,7 @@ import { AlertsContext } from '../../../context/AlertsContext';
 const ApiContainer = (props) => {
     const { addAlert } = useContext(AlertsContext);
     const { error, setError } = props.api;
+    const options = props.options ?? {};
 
     useEffect(() => {
         if(error) {
@@ -19,7 +20,7 @@ const ApiContainer = (props) => {
 
     if(props.api.loading) {
         return (
-            <Segment vertical basic style={{height: '5rem'}}>
+            <Segment {...options} style={{height: '5rem'}}>
                 <Dimmer inverted active>
                     <Loader inverted>Loading...</Loader>
                 </Dimmer>
@@ -28,7 +29,7 @@ const ApiContainer = (props) => {
         );
     } else {
         return (
-            <Segment vertical basic>
+            <Segment {...options}>
                 {props.children}
             </Segment>
         );

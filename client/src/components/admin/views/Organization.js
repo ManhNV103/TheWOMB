@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Header, Breadcrumb } from 'semantic-ui-react';
-import useApi from '../../../util/useApi';
 import Layout from '../layout/Layout';
-import ApiContainer from '../blocks/ApiContainer';
+import AdminPage from '../layout/AdminPage';
+import ApiProvider from '../../../context/ApiContext';
 import OrganizationForm from '../organizations/OrganizationForm';
 
 const breadcrumbs = [
@@ -13,25 +12,24 @@ const breadcrumbs = [
 ];
 
 const Organization = (props) => {
-	const { id } = props.match.params;
-
-	const api = useApi(`/organizations/${id}`, {}, {
+    const { id } = props.match.params;
+    
+    const organization = {
 		id: -1,
 		name: '',
 		image: '',
         config_file: '',
         disabled: false
-	});
+    };
+    const title = 'Organization' + (id ? ` #${id}` : '');
 
 	return (
 		<Layout active={props.match.url}>
-			<Container fluid>
-				<Header className="page-header" as="h2">Organization{ api.data.id ? ` #${api.data.id}` : '' }</Header>
-				<Breadcrumb icon="right angle" sections={breadcrumbs}/>
-                <ApiContainer api={api}>
-                    <OrganizationForm api={api} />
-                </ApiContainer>
-			</Container>
+            <AdminPage title={title} breadcrumbs={breadcrumbs}>
+                <ApiProvider endpoint={`/organizations/${id}`} init={organization}>
+                    <OrganizationForm />
+                </ApiProvider>
+            </AdminPage>
 		</Layout>
 	);
 };

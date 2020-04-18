@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Header, Breadcrumb, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 import Layout from '../layout/Layout';
+import AdminPage from '../layout/AdminPage';
 import OrganizationForm from '../organizations/OrganizationForm';
-import useApi from '../../../util/useApi';
+import ApiProvider from '../../../context/ApiContext';
 
 const breadcrumbs = [
 	{ key: 'Admin', content: 'Admin', as: Link, to: '/admin', link: true },
@@ -12,23 +13,23 @@ const breadcrumbs = [
 ];
 
 const NewOrganization = (props) => {
-	const api = useApi('', {}, {
+    const organization = {
 		id: -1,
 		name: '',
 		image: '',
         config_file: '',
         disabled: false
-	});
+    };
 
 	return (
 		<Layout active={props.match.url}>
-			<Container fluid>
-				<Header className="page-header" as="h2">Add Organization</Header>
-				<Breadcrumb icon="right angle" sections={breadcrumbs}/>
+            <AdminPage title="Add Organization" breadcrumbs={breadcrumbs}>
 				<Segment>
-					<OrganizationForm api={api} />
+                    <ApiProvider endpoint="" init={organization}>
+                        <OrganizationForm />
+                    </ApiProvider>
 				</Segment>
-			</Container>
+            </AdminPage>
 		</Layout>
 	);
 };

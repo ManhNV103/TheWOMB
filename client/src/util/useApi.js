@@ -1,5 +1,5 @@
 import { useEffect, useContext } from 'react';
-import { get } from '../services/apiService';
+import { get } from '../services/ApiService';
 import ApiContext from '../context/ApiContext';
 
 const useApi = (end, opt = {}, init = null) => {

@@ -40,9 +40,6 @@
 		"presets": [
 			"@babel/preset-env"
         ],
-        "ignore": [
-            "storage"
-        ],
 		"plugins": [
 			[
 				"@babel/plugin-transform-runtime",
@@ -51,5 +48,10 @@
 				}
 			]
 		]
-	}
+    },
+    "nodemonConfig": {
+        "ignore": [
+            "./storage"
+        ]
+    }
 }

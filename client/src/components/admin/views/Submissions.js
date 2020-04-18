@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Container, Header, Breadcrumb } from 'semantic-ui-react';
-import useApi from '../../../util/useApi';
 import Layout from '../layout/Layout';
 import SubmissionList from '../submissions/SubmissionList';
 
@@ -11,14 +10,12 @@ const breadcrumbs = [
 ];
 
 const Submissions = (props) => {
-	const api = useApi('/submissions', {} , []);
-    
     return (
         <Layout active={props.match.url}>
             <Container fluid className="content">
                 <Header className="page-header" as="h2">Submissions</Header>
 				<Breadcrumb icon="right angle" sections={breadcrumbs} />
-                <SubmissionList submissions={api.data} />
+                <SubmissionList />
             </Container>
         </Layout>
     );

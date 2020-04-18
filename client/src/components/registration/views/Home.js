@@ -1,5 +1,4 @@
 import React from 'react';
-import useApi from '../../../util/useApi';
 import AdvertiserSelector from '../advertisers/AdvertiserSelector';
 import Layout from '../layout/Layout';
 import SelectedProvider from '../../../context/SelectedContext';
@@ -9,9 +8,9 @@ const Home = () => {
     return (
         <Layout>
             <div className="ui container">
-                <ApiProvider>
+                <ApiProvider endpoint="/advertisers" init={[]}>
                     <SelectedProvider>
-                        <AdvertiserSelector api={api} />
+                        <AdvertiserSelector />
                     </SelectedProvider>
                 </ApiProvider>
             </div>

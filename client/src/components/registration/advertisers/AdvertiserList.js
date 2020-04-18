@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import { Grid } from 'semantic-ui-react';
 import Advertiser from './Advertiser';
 import { SelectedContext } from '../../../context/SelectedContext';
+import { ApiContext } from '../../../context/ApiContext';
 
 const AdvertiserList = (props) => {
-    const advertisers = props.api.data;
+    const { data: advertisers } = useContext(ApiContext);
     const { selected, addOrganization, removeOrganization } = useContext(SelectedContext);
 	const imagesPerRow = 5;
 

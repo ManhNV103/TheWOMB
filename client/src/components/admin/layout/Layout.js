@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AlertsProvider from '../../../context/AlertsContext';
-import Alerts from '../blocks/Alerts';
+import Alerts from '../../common/Alerts';
 import Sidebar from './Sidebar';
 import TopMenu from './TopMenu';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Table, Button, Confirm, Image, Label } from 'semantic-ui-react'
-import { deleteResource } from '../../../services/apiService';
+import { deleteResource } from '../../../services/ApiService';
 
 const OrganizationRow = (props) => {
     const organization = props.organization;

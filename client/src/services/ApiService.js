@@ -1,5 +1,5 @@
 import ApiError from '../util/ApiError';
-import { getToken, logout } from '../services/authService';
+import { getToken, logout } from './AuthService';
 import { API_BASE } from '../constants';
 
 const defaultOptions = {

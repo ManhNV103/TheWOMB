@@ -1,8 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Header, Segment, Button } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 import Layout from '../layout/Layout';
 import FormFactory from '../form/FormFactory';
+import ApiProvider from '../../../context/ApiContext';
 
 const Form = (props) => {
     const history = useHistory();
@@ -18,10 +19,12 @@ const Form = (props) => {
         <Layout>
             <div className="ui container">
                 <Header></Header>
-                <FormFactory selected={selected} />
-                <Segment basic vertical textAlign="right">
-                    <Button primary>Submit</Button>
-                </Segment>
+                <ApiProvider
+                    endpoint="/advertisers/form"
+                    options={{ query: { selected: Array.from(selected) }}}
+                >
+                    <FormFactory selected={selected} />
+                </ApiProvider>
             </div>
         </Layout>
     );

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Header, Card, Statistic, Breadcrumb } from 'semantic-ui-react';
+import { Card, Statistic } from 'semantic-ui-react';
 import Layout from '../layout/Layout';
+import AdminPage from '../layout/AdminPage';
 
 const breadcrumbs = [
 	{ key: 'Admin', content: 'Admin', as: Link, to: '/admin', link: true },
@@ -11,9 +12,7 @@ const breadcrumbs = [
 const Dashboard = (props) => {
     return (
         <Layout active={props.match.url}>
-            <Container fluid>
-                <Header className="page-header" as="h2">Dashboard</Header>
-				<Breadcrumb icon="right angle" sections={breadcrumbs} />
+            <AdminPage title="Dashboard" breadcrumbs={breadcrumbs}>
                 <Card.Group itemsPerRow={4}>
                     <Card>
                         <Card.Content className="centered">
@@ -48,7 +47,7 @@ const Dashboard = (props) => {
                         </Card.Content>
                     </Card>
                 </Card.Group>
-            </Container>
+            </AdminPage>
         </Layout>
     );
 };

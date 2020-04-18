@@ -1,4 +1,4 @@
-import { post } from '../services/apiService';
+import { post } from './ApiService';
 import ApiError from '../util/ApiError';
 
 const login = async (username, password, rememberMe = false) => {

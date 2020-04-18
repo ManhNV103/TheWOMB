@@ -1,17 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form } from 'semantic-ui-react';
 import Field from './fields/Field';
 import fields from './fields';
-import useApi from '../../../util/useApi';
+import { ApiContext } from '../../../context/ApiContext';
 
 const FormFactory = (props) => {
-    const api = useApi('/advertisers/form', {
-        query: {
-            selected: Array.from(props.selected)
-        }
-    });
-
-    const form = api.data;
+    const { data: form } = useContext(ApiContext);
 
     if(!form) {
         return <div></div>;

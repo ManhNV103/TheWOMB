@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { Message, Container } from 'semantic-ui-react';
-import { AlertsContext } from '../../../context/AlertsContext';
+import { Message } from 'semantic-ui-react';
+import { AlertsContext } from '../../context/AlertsContext';
 
 const Alerts = (props) => {
     const { alerts, removeAlert } = useContext(AlertsContext);
@@ -10,7 +10,7 @@ const Alerts = (props) => {
     };
 
     if(!alerts) {
-        return;
+        return null;
     }
 
     const alertsDOM = alerts.map((alert, i) => {
@@ -24,11 +24,9 @@ const Alerts = (props) => {
     });
 
     return (
-        <Container>
-            <div className="alerts">
-                { alertsDOM }
-            </div>
-        </Container>
+        <div className="alerts">
+            { alertsDOM }
+        </div>
     );
 }
 

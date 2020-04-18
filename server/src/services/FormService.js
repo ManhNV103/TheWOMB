@@ -15,7 +15,7 @@ const generateForm = (advertisers) => {
 
         return form;
     } catch(e) {
-        throw new Error(e.message);
+        throw new Error("An error ocurred in an advertisers configuration");
     }
 };
 

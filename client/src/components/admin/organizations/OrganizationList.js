@@ -1,21 +1,45 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Table, Button, Icon } from 'semantic-ui-react';
 import OrganizationRow from './OrganizationRow';
+import ApiSegment from '../../common/ApiSegment';
+import { ApiContext } from '../../../context/ApiContext';
 
 const OrganizationList = (props) => {
-    const organizations = props.api.data;
+    const { data: organizations, loading } = useContext(ApiContext);
     const history = useHistory();
 
-    const rows = organizations.map(organization => {
-        return (
-            <OrganizationRow
-                key={organization.id}
-                organization={organization}
-                api={props.api}
-            />
+    let rowsDom = null;
+
+    if(loading) {
+        rowsDom = (
+            <Table.Row>
+                <Table.Cell colSpan="6">
+                    <ApiSegment basic vertical loading={loading} />
+                </Table.Cell>
+            </Table.Row>
         );
-    });
+    } else {
+        const rows = organizations.map(organization => {
+            return (
+                <OrganizationRow
+                    key={organization.id}
+                    organization={organization}
+                    api={props.api}
+                />
+            );
+        });
+
+        if(rows.length > 0) {
+            rowsDom = rows;
+        } else {
+            rowsDom = (
+                <Table.Row>
+                    <Table.Cell colSpan="6" className="centered">No organizations found</Table.Cell>
+                </Table.Row>
+            );
+        }
+    }
 
     return (
         <div>
@@ -30,13 +54,7 @@ const OrganizationList = (props) => {
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {
-                        rows.length > 0 ?
-                        rows :
-                        <Table.Row>
-                            <Table.Cell colSpan="6" className="centered">No organizations found</Table.Cell>
-                        </Table.Row>
-                    }
+                    { rowsDom }
                 </Table.Body>
 				<Table.Footer>
 					<Table.Row>

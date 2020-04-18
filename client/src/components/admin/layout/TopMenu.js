@@ -1,6 +1,6 @@
 import React from 'react';
 import { Dropdown, Icon, Menu } from 'semantic-ui-react';
-import { logout } from '../../../services/authService';
+import { logout } from '../../../services/AuthService';
 
 const TopMenu = (props) => {
     const toggleSidebar = () => {

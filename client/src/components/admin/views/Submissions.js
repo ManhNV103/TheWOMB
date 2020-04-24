@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Header, Breadcrumb } from 'semantic-ui-react';
 import Layout from '../layout/Layout';
+import AdminPage from '../layout/AdminPage';
 import SubmissionList from '../submissions/SubmissionList';
+import ApiProvider from '../../../context/ApiContext';
 
 const breadcrumbs = [
 	{ key: 'Admin', content: 'Admin', as: Link, to: '/admin', link: true },
@@ -12,11 +13,11 @@ const breadcrumbs = [
 const Submissions = (props) => {
     return (
         <Layout active={props.match.url}>
-            <Container fluid className="content">
-                <Header className="page-header" as="h2">Submissions</Header>
-				<Breadcrumb icon="right angle" sections={breadcrumbs} />
-                <SubmissionList />
-            </Container>
+            <AdminPage title="Submissions" breadcrumbs={breadcrumbs}>
+                <ApiProvider endpoint="/submissions" init={[]}>
+                    <SubmissionList />
+                </ApiProvider>
+            </AdminPage>
         </Layout>
     );
 };

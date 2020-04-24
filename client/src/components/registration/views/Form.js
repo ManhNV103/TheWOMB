@@ -18,7 +18,7 @@ const Form = (props) => {
     return (
         <Layout>
             <div className="ui container">
-                <Header></Header>
+                <Header>Event Registration Form</Header>
                 <ApiProvider
                     endpoint="/advertisers/form"
                     options={{ query: { selected: Array.from(selected) }}}

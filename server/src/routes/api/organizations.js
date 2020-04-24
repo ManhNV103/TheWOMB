@@ -115,6 +115,6 @@ router.get('/organizations/:id/:image', async (req, res, next) => {
 	}
 
 	res.sendFile(organization.getImageFile());
-})
+});
 
 export default router;

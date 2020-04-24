@@ -1,10 +1,14 @@
 import React from 'react';
 
-const Field = (props) => {
-    const Component = props.as;
+const Field = ({ as, data, ...props }) => {
+    const Component = as;
+
+    const onChange = (value) => {
+        props.onChange(value); 
+    }
 
     return (
-        <Component data={props.data} />
+        <Component onChange={onChange} data={data} />
     );
 };
 

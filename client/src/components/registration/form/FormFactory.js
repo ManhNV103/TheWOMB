@@ -4,16 +4,20 @@ import Field from './fields/Field';
 import fields from './fields';
 import { ApiContext } from '../../../context/ApiContext';
 
-const FormFactory = (props) => {
+const FormFactory = () => {
     const { data: form } = useContext(ApiContext);
 
     if(!form) {
-        return <div></div>;
+        return null;
     }
 
     const formDom = form.fields.map((field, key) => {
+        const onChange = (value) => {
+            console.log(value);
+        };
+
         return (
-            <Field key={key} as={fields[field.component]} data={field} />
+            <Field key={key} as={fields[field.component]} data={field} onChange={onChange} />
         );
     });
 

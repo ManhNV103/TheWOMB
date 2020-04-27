@@ -1,0 +1,24 @@
+{
+    "fields": {
+        "EVENT_TITLE": {
+            "label": "Event Title",
+            "component": "INPUT"
+        },
+        "FIRST_NAME": {
+            "labell": "First Name",
+            "component": "INPUT"
+        },
+        "LAST_NAME": {
+            "label": "Last Name",
+            "component": "INPUT"
+        },
+        "CONTACT_PHONE": {
+            "label": "Contact Phone",
+            "component": "INPUT"
+        },
+        "START_DATE": {
+            "label": "Event Title",
+            "component": "DATETIME"
+        }
+    }
+}

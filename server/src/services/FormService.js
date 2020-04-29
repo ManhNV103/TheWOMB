@@ -1,6 +1,5 @@
 import RegistrationForm from '../models/form/RegistrationForm';
 import Submission from '../models/Submission';
-import OrganizationSubmission from '../models/OrganizationSubmission';
 import { FORM_CONFIG } from '../constants';
 
 const generateForm = (advertisers) => {
@@ -19,7 +18,7 @@ const generateForm = (advertisers) => {
 
         return form;
     } catch(e) {
-        throw new Error("An error ocurred in an advertisers configuration");
+        throw new Error(e.message);
     }
 };
 

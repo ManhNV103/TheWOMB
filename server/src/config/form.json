@@ -5,7 +5,7 @@
             "component": "INPUT"
         },
         "FIRST_NAME": {
-            "labell": "First Name",
+            "label": "First Name",
             "component": "INPUT"
         },
         "LAST_NAME": {
@@ -16,9 +16,23 @@
             "label": "Contact Phone",
             "component": "INPUT"
         },
-        "START_DATE": {
-            "label": "Event Title",
+        "ORGANIZATION_NAME": {
+            "label": "Organization Name",
+            "component": "INPUT"
+        },
+        "EVENT_START": {
+            "label": "Event Start",
+            "component": "DATETIME"
+        },
+        "EVENT_STOP": {
+            "label": "Event Stop",
             "component": "DATETIME"
         }
-    }
+    },
+    "default_fields": [
+        "FIRST_NAME",
+        "LAST_NAME",
+        "CONTACT_PHONE",
+        "EVENT_TITLE"
+    ]
 }

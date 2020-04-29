@@ -44,8 +44,12 @@ const SubmissionList = (props) => {
             <Table celled>
                 <Table.Header>
                     <Table.Row>
-                        <Table.HeaderCell></Table.HeaderCell>
-                        <Table.HeaderCell></Table.HeaderCell>
+                        <Table.HeaderCell>ID</Table.HeaderCell>
+                        <Table.HeaderCell>First Name</Table.HeaderCell>
+                        <Table.HeaderCell>Last Name</Table.HeaderCell>
+                        <Table.HeaderCell>Contact Phone</Table.HeaderCell>
+                        <Table.HeaderCell>Event Title</Table.HeaderCell>
+                        <Table.HeaderCell>Manage</Table.HeaderCell>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>

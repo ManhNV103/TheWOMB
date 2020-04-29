@@ -4,7 +4,11 @@ import Submission from '../../models/Submission';
 const router = express.Router();
 
 router.get('/submissions', authenticate, async (req, res, next) => {
-    const submissions = await Submission.query();
+    const submissions = await(await Submission.query()).map((submission) => {
+        submission.default_fields = JSON.parse(submission.default_fields);
+
+        return submission;
+    })
 
 	res.json(submissions);
 });

@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ApiContext } from '../../../../context/ApiContext';
 
-const Field = ({ as, data, ...props }) => {
-    const Component = as;
+const Field = ({ as: Component, data, ...props }) => {
+    const { data: form, setData } = useContext(ApiContext);
 
-    const onChange = (value) => {
-        props.onChange(value); 
+    const onChange = (id, value) => {
+        const index = form.fields.findIndex(field => field.id === id);
+
+        form.fields[index].value = value;
+
+        setData({ ...form });
     }
 
     return (

@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Form } from 'semantic-ui-react';
+import { Form, Segment, Button } from 'semantic-ui-react';
 import Field from './fields/Field';
 import fields from './fields';
+import { post } from '../../../services/ApiService';
 import { ApiContext } from '../../../context/ApiContext';
 
-const FormFactory = () => {
+const FormFactory = ({ selected }) => {
     const { data: form } = useContext(ApiContext);
 
     if(!form) {
@@ -12,18 +13,27 @@ const FormFactory = () => {
     }
 
     const formDom = form.fields.map((field, key) => {
-        const onChange = (value) => {
-            console.log(value);
-        };
-
         return (
-            <Field key={key} as={fields[field.component]} data={field} onChange={onChange} />
+            <Field key={key} as={fields[field.component]} data={field} /> 
         );
     });
 
+    const onSubmit = () => {
+        post('/advertisers/form', {
+            form: form
+        }, {
+            query: {
+                selected: Array.from(selected)
+            }
+        });
+    }
+
     return (
-        <Form>
+        <Form onSubmit={onSubmit}>
             { formDom }
+            <Segment basic vertical textAlign="right">
+                <Button primary>Submit</Button>
+            </Segment>
         </Form>
     );
 };

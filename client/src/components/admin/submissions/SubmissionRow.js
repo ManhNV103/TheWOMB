@@ -28,6 +28,10 @@ const OrganizationRow = ({ submission, api }) => {
     return (
         <Table.Row>
             <Table.Cell>{ submission.id }</Table.Cell>
+            <Table.Cell>{ submission.default_fields[0].value }</Table.Cell>
+            <Table.Cell>{ submission.default_fields[1].value }</Table.Cell>
+            <Table.Cell>{ submission.default_fields[2].value }</Table.Cell>
+            <Table.Cell>{ submission.default_fields[3].value }</Table.Cell>
             <Table.Cell>
                 <Button onClick={() => history.push(`/admin/submission/${submission.id}`)}>
                     View

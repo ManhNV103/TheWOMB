@@ -1,7 +1,7 @@
 import express from 'express';
 import createError from 'http-errors';
 import Organization from '../../models/Organization';
-import { generateForm } from '../../services/FormService';
+import { generateForm, submitForm } from '../../services/FormService';
 const router = express.Router();
 
 router.get('/advertisers', async (req, res, next) => {
@@ -33,7 +33,27 @@ router.get('/advertisers/form', async (req, res, next) => {
         const form = generateForm(advertisers);
 
         res.json({
-                fields: form.fields
+            fields: form.fields
+        });
+    } catch(e) {
+        return next(createError(500, e.message));
+    }
+});
+
+router.post('/advertisers/form', async (req, res, next) => {
+    const ids = req.query.selected.split(',');
+
+    if(!ids || ids.length <= 0) {
+        return next(createError(500, 'Advertisers array not supplied'));
+    }
+
+    const advertisers = await Organization.query().whereIn('id', ids);
+
+    try {
+        const success = await submitForm(advertisers, req.body.form);
+
+        res.json({
+            success: success
         });
     } catch(e) {
         return next(createError(500, e.message));

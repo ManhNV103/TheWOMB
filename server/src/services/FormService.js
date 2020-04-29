@@ -1,15 +1,19 @@
 import RegistrationForm from '../models/form/RegistrationForm';
-import Field from '../models/form/Field';
+import Submission from '../models/Submission';
+import OrganizationSubmission from '../models/OrganizationSubmission';
+import { FORM_CONFIG } from '../constants';
 
 const generateForm = (advertisers) => {
-    const form = new RegistrationForm();
+    const form = new RegistrationForm(FORM_CONFIG);
+
+    form.addDefaults();
 
     try {
         advertisers.map((advertiser) => {
             advertiser.form = advertiser.fetchForm();
 
-            advertiser.form.fields.map((field) => {
-                form.addField(new Field(field));
+            advertiser.form.fields.map((id) => {
+                form.addField(form.findFieldById(id));
             });
         });
 
@@ -19,6 +23,29 @@ const generateForm = (advertisers) => {
     }
 };
 
+const submitForm = async (advertisers, json) => {
+    const form = new RegistrationForm(FORM_CONFIG, json);
+
+	const submission = await Submission.query().insertGraph({
+        default_fields: JSON.stringify(form.getDefaultFields())
+    });
+
+    try {
+        advertisers.map(async (advertiser) => {
+            const organizationSubmission = await submission.$relatedQuery('organizationSubmissions').insert({
+                organization_id: advertiser.id,
+                form: JSON.stringify(form.getOrganizationFields(advertiser)),
+                status: 'PENDING'
+            });
+        });
+
+        return true;
+    } catch(e) {
+
+    }
+}
+
 export {
-    generateForm
+    generateForm,
+    submitForm
 };

@@ -42,6 +42,14 @@ const request = (url, options) => {
         options.headers['Authorization'] = `Bearer ${token}`;
     }
 
+    if(options.query) {
+        url = new URL(url);
+
+        Object.keys(options.query).forEach((key) => {
+            return url.searchParams.append(key, options.query[key]);
+        });
+    }
+
     const onSuccess = async (resp) => {
         if(!resp.ok) {
             const err = await resp.json();
@@ -84,14 +92,6 @@ const get = (endpoint, options = {}) => {
     };
 
     let url = getUrl(endpoint);
-
-    if(options.query) {
-        url = new URL(url);
-
-        Object.keys(options.query).forEach((key) => {
-            return url.searchParams.append(key, options.query[key]);
-        });
-    }
 
     return request(url, requestOptions);
 };

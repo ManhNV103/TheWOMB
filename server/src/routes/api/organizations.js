@@ -112,7 +112,9 @@ router.get('/organizations/:id/:image', async (req, res, next) => {
 
 	if(organization.image !== image) {
 		return next(createError(404, 'Organization image not found'));
-	}
+    }
+    
+    console.log(organization.getImageFile());
 
 	res.sendFile(organization.getImageFile());
 });

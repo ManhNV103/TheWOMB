@@ -9,7 +9,7 @@ class Organization extends Model {
 	}
 	
 	getImageFile() {
-		return `${process.cwd()}/${STORAGE_DIR}/${this.id}/${this.image}`;
+		return `${STORAGE_DIR}/${this.id}/${this.image}`;
 	}
 
 	getImageUrl() {

@@ -14,6 +14,7 @@ router.get('/submissions', authenticate, async (req, res, next) => {
 });
 
 router.post('/submissions', authenticate, async (req, res, next) => {
+
     const submission = await Submission.query().insertGraph({
         defaults: JSON.stringify(req.body.defaults)
     });

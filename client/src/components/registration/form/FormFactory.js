@@ -12,6 +12,7 @@ const FormFactory = ({ selected }) => {
         return null;
     }
 
+
     const formDom = form.fields.map((field, key) => {
         return (
             <Field key={key} as={fields[field.component]} data={field} /> 

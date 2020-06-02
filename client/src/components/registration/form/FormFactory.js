@@ -15,7 +15,7 @@ const FormFactory = () => {
         const onChange = (value) => {
             console.log(value);
         };
-
+        debugger
         return (
             <Field key={key} as={fields[field.component]} data={field} onChange={onChange} />
         );

@@ -1,0 +1,9 @@
+{
+    "form": {
+        "fields": [
+            "component": "INPUT",
+            "name": "First Name",
+            "required": true
+        ]
+    }
+}
